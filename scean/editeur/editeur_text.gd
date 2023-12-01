@@ -11,6 +11,8 @@ enum file_option{
 @onready var dropMenuFile = $MenuBar/HBoxContainer/MenuButton
 @onready var open_file_window = $OpenFileWindow
 @onready var save_file_window = $SaveFileWindow
+@onready var menu_button_analyse = $MenuBar/HBoxContainer/MenuButtonAnalyse
+@onready var text_edit = $TextEdit
 
 var app_name = "snake"
 var current_file = "Untitled"
@@ -20,10 +22,26 @@ var current_file = "Untitled"
 func _ready():
 	update_window_name()
 	dropMenuFile.get_popup().connect("id_pressed",on_item_pressed)
+	menu_button_analyse.get_popup().connect("id_pressed",on_analyse)
 
 func update_window_name():
 	DisplayServer.window_set_title(app_name +" _ "+ current_file)
 
+
+#les option de l'analyseur 
+func on_analyse(id):
+	save_file()
+	if(current_file == "Untitled"):
+		return
+	var path = "C:/Users/PC/Documents/Snake_compiler/analyseur/analyse lex/main.exe"
+	var arg = [current_file]
+	var out_put=[]
+	var pid = OS.execute(path,PackedStringArray(arg),out_put,false,true)
+	print(out_put)
+	OS.kill(pid);
+	
+
+#function de getion des button fichier
 func on_item_pressed(id):
 	var item_id = dropMenuFile.get_popup().get_item_id(id)
 	match item_id:
@@ -43,6 +61,8 @@ func _on_open_file_window_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	$TextEdit.text = file.get_as_text();
 	file.close()
+	current_file = path
+	update_window_name()
 
 
 func _on_save_file_window_file_selected(path):

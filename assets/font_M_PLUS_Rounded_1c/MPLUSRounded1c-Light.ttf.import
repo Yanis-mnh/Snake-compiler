@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ui20mlfcgq5w"
-path="res://.godot/imported/PixelifySans-VariableFont_wght.ttf-f9410a2312f35abd5c8504c8ad5924d8.fontdata"
+uid="uid://drqcdubjquo1g"
+path="res://.godot/imported/MPLUSRounded1c-Light.ttf-75fcf915d4d88a7ec94be48270bdc71c.fontdata"
 
 [deps]
 
-source_file="res://PixelifySans-VariableFont_wght.ttf"
-dest_files=["res://.godot/imported/PixelifySans-VariableFont_wght.ttf-f9410a2312f35abd5c8504c8ad5924d8.fontdata"]
+source_file="res://assets/font_M_PLUS_Rounded_1c/MPLUSRounded1c-Light.ttf"
+dest_files=["res://.godot/imported/MPLUSRounded1c-Light.ttf-75fcf915d4d88a7ec94be48270bdc71c.fontdata"]
 
 [params]
 
