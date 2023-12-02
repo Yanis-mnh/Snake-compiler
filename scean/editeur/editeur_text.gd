@@ -8,10 +8,10 @@ enum file_option{
 	quit
 	}
 
-@onready var dropMenuFile = $MenuBar/HBoxContainer/MenuButton
+@onready var dropMenuFile = $"title bar/MenuBar/HBoxContainer/MenuButton"
 @onready var open_file_window = $OpenFileWindow
 @onready var save_file_window = $SaveFileWindow
-@onready var menu_button_analyse = $MenuBar/HBoxContainer/MenuButtonAnalyse
+@onready var menu_button_analyse = $"title bar/MenuBar/HBoxContainer/MenuButtonAnalyse"
 @onready var text_edit = $TextEdit
 
 var app_name = "snake"
@@ -23,6 +23,7 @@ func _ready():
 	update_window_name()
 	dropMenuFile.get_popup().connect("id_pressed",on_item_pressed)
 	menu_button_analyse.get_popup().connect("id_pressed",on_analyse)
+
 
 func update_window_name():
 	DisplayServer.window_set_title(app_name +" _ "+ current_file)
@@ -46,7 +47,8 @@ func on_item_pressed(id):
 	var item_id = dropMenuFile.get_popup().get_item_id(id)
 	match item_id:
 		file_option.new_file:
-			pass
+			current_file = "Untitled"
+			text_edit.text = "";
 		file_option.load_file:
 			open_file_window.popup_centered()
 		file_option.save_file:
@@ -87,6 +89,4 @@ func save_file():
 func _on_text_edit_text_changed():
 	app_name = "(*) snake"
 	update_window_name()
-
-
 

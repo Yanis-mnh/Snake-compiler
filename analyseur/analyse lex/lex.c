@@ -3,7 +3,7 @@
 #include <string.h>
 #include <string.h>
 
-#include "datatype.h"
+#include "fonctions.h"
 /**
 *
 * @param argv[] is a vecteur of string that we will pass the path of the file to analyse
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
 	{
 		printf("%c",c);
 	}
+	test();
 	fclose(file);
 	return 0;
 }

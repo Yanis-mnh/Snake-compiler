@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=14 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
 [ext_resource type="FontFile" uid="uid://cr8ee23yrkav0" path="res://assets/font_M_PLUS_Rounded_1c/MPLUSRounded1c-Bold.ttf" id="1_y4xlf"]
 [ext_resource type="Script" path="res://scean/editeur/windowGestion.gd" id="2_s6d8p"]
 [ext_resource type="Texture2D" uid="uid://cqrdc55u38xvy" path="res://assets/icons/minimize.png" id="3_bwlfh"]
 [ext_resource type="Script" path="res://scean/editeur/TextEdit.gd" id="3_dib2g"]
+[ext_resource type="Script" path="res://scean/editeur/title bar.gd" id="3_n8v7h"]
 [ext_resource type="Texture2D" uid="uid://6gh0fngyee3q" path="res://assets/icons/close_icon.png" id="4_eeqtw"]
 [ext_resource type="Texture2D" uid="uid://chmaqbsfuloim" path="res://assets/icons/maximize.png" id="4_pior6"]
 
@@ -49,44 +50,51 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0431373, 0.0941176, 0.180392, 1)
 
-[node name="MenuWindow" type="MenuBar" parent="."]
+[node name="title bar" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-offset_left = -216.0
-offset_top = 2.0
-offset_bottom = 42.0
-grow_horizontal = 0
-script = ExtResource("2_s6d8p")
+offset_bottom = 43.0
+grow_horizontal = 2
+script = ExtResource("3_n8v7h")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuWindow"]
+[node name="MenuWindow" type="MenuBar" parent="title bar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -136.0
-offset_top = 4.0
+offset_bottom = 43.0
+grow_horizontal = 0
+script = ExtResource("2_s6d8p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuWindow"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -136.0
+offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 34.0
+offset_bottom = 38.0
 grow_horizontal = 0
 alignment = 2
 
-[node name="minimaze" type="Button" parent="MenuWindow/HBoxContainer"]
+[node name="minimaze" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
 custom_minimum_size = Vector2(37, 30)
 layout_mode = 2
 icon = ExtResource("3_bwlfh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="big_small" type="Button" parent="MenuWindow/HBoxContainer"]
+[node name="big_small" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
 custom_minimum_size = Vector2(37, 30)
 layout_mode = 2
 icon = ExtResource("4_pior6")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Close" type="Button" parent="MenuWindow/HBoxContainer"]
+[node name="Close" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
 custom_minimum_size = Vector2(37, 30)
 layout_mode = 2
 theme = SubResource("Theme_i77d8")
@@ -94,22 +102,22 @@ icon = ExtResource("4_eeqtw")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MenuBar" type="MenuBar" parent="."]
+[node name="MenuBar" type="MenuBar" parent="title bar"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 8.0
-offset_right = -704.0
+offset_right = -810.0
 offset_bottom = 43.0
 grow_horizontal = 2
 flat = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuBar"]
 layout_mode = 0
 offset_right = 376.0
 offset_bottom = 51.0
 
-[node name="MenuButton" type="MenuButton" parent="MenuBar/HBoxContainer"]
+[node name="MenuButton" type="MenuButton" parent="title bar/MenuBar/HBoxContainer"]
 layout_mode = 2
 text = "File"
 switch_on_hover = true
@@ -125,7 +133,7 @@ popup/item_3/id = 3
 popup/item_4/text = "Quit"
 popup/item_4/id = 4
 
-[node name="MenuButtonAnalyse" type="MenuButton" parent="MenuBar/HBoxContainer"]
+[node name="MenuButtonAnalyse" type="MenuButton" parent="title bar/MenuBar/HBoxContainer"]
 layout_mode = 2
 text = "Compile"
 switch_on_hover = true
@@ -172,9 +180,11 @@ cancel_button_text = "Anuller"
 access = 2
 filters = PackedStringArray("..snk")
 
-[connection signal="pressed" from="MenuWindow/HBoxContainer/minimaze" to="MenuWindow" method="_on_minimaze_pressed"]
-[connection signal="pressed" from="MenuWindow/HBoxContainer/big_small" to="MenuWindow" method="_on_big_small_pressed"]
-[connection signal="pressed" from="MenuWindow/HBoxContainer/Close" to="MenuWindow" method="_on_close_pressed"]
+[connection signal="mouse_entered" from="title bar" to="title bar" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="title bar" to="title bar" method="_on_mouse_exited"]
+[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/minimaze" to="title bar/MenuWindow" method="_on_minimaze_pressed"]
+[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/big_small" to="title bar/MenuWindow" method="_on_big_small_pressed"]
+[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/Close" to="title bar/MenuWindow" method="_on_close_pressed"]
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="file_selected" from="OpenFileWindow" to="." method="_on_open_file_window_file_selected"]
 [connection signal="file_selected" from="SaveFileWindow" to="." method="_on_save_file_window_file_selected"]
