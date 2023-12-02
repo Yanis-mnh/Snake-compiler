@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string.h>
 
+#include "datatype.h"
 /**
 *
 * @param argv[] is a vecteur of string that we will pass the path of the file to analyse
@@ -9,10 +11,14 @@
 *
 */
 
+
+
+
+
 int main(int argc, char *argv[]) {
 	
 	//juste for testing this line should be changed later
-	argv[1] = "test001.snk"
+	argv[1] = "test001.snk";
 	
 	char c;
 	FILE *file;
@@ -33,3 +39,9 @@ int main(int argc, char *argv[]) {
 	fclose(file);
 	return 0;
 }
+
+
+
+
+
+
