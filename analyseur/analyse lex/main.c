@@ -12,8 +12,7 @@
 int main(int argc, char *argv[]) {
 	
 	//juste for testing this line should be changed later
-	
-	
+	argv[1] = "test001.snk"
 	
 	char c;
 	FILE *file;
