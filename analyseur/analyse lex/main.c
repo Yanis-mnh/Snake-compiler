@@ -10,7 +10,12 @@
 */
 
 int main(int argc, char *argv[]) {
-	int i;char c;
+	
+	//juste for testing this line should be changed later
+	
+	
+	
+	char c;
 	FILE *file;
 	
 	

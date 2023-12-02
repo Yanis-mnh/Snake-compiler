@@ -33,10 +33,10 @@ func on_analyse(id):
 	save_file()
 	if(current_file == "Untitled"):
 		return
-	var path = "C:/Users/PC/Documents/Snake_compiler/analyseur/analyse lex/main.exe"
+	var exePath = "analyseur/analyse lex/main.exe"
 	var arg = [current_file]
 	var out_put=[]
-	var pid = OS.execute(path,PackedStringArray(arg),out_put,false,true)
+	var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
 	print(out_put)
 	OS.kill(pid);
 	
