@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <string.h>
+
 
 #include "fonctions.h"
 /**
@@ -19,8 +19,10 @@ int main(int argc, char *argv[]) {
 	
 	//juste for testing this line should be changed later
 	argv[1] = "test001.snk";
-	
+	char programme[300];
 	char c;
+	
+	
 	FILE *file;
 	
 	
@@ -32,11 +34,14 @@ int main(int argc, char *argv[]) {
 	}
 	
 	//juste un test pour ouvrire le fichier 
+	int i=0;
 	while((c = fgetc(file) ) != EOF)
 	{
-		printf("%c",c);
+		programme[i] = c;
+		i++;
 	}
-	test();
+	
+	analyseur_lex(programme);
 	fclose(file);
 	return 0;
 }

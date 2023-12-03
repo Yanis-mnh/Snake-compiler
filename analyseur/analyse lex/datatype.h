@@ -13,10 +13,33 @@ typedef enum {
 	TOKEN_NUMBER,
     TOKEN_REAL_NUMBER
 }tokenName;
+// Tableau de chaînes de caractères correspondant aux mots-clés
+const char *keywords[12] = {
+    "Snk_Begin",
+    "Snk_Int",
+    "Snk_Real",
+    "Set",
+    "If",
+    "Else",
+    "Get",
+    "Snk_Print",
+    "$$",
+    "Snk_End",
+    "Identifier",
+    "Number",
+    "Real_Number"
+};
+// state possibles de l'automate se2 go brrrrrrrrrrrrrr
+typedef enum {
+    START,
+    IDENTIFIER,
+    NUMBER,
+    INVALID
+} State;
 
 
 //strcuteur d'un id
 typedef struct{
-	char *value;	
+	char *value;
 }idToken;
 
