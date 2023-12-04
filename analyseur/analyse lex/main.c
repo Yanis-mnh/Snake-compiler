@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #include "fonctions.h"
 /**
 *
@@ -18,7 +17,7 @@
 int main(int argc, char *argv[]) {
 	
 	//juste for testing this line should be changed later
-	argv[1] = "test001.snk";
+	char test[20] = "test001.snk";
 	char programme[300];
 	char c;
 	
@@ -26,7 +25,7 @@ int main(int argc, char *argv[]) {
 	FILE *file;
 	
 	
-	file = fopen(argv[1],"r");
+	file = fopen(test,"r");
 	if(file == NULL)
 	{
 		printf("ERROR D'OVERTURE DU FICHIER ");
@@ -40,7 +39,6 @@ int main(int argc, char *argv[]) {
 		programme[i] = c;
 		i++;
 	}
-	
 	analyseur_lex(programme);
 	fclose(file);
 	return 0;

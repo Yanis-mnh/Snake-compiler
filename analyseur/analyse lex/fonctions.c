@@ -1,8 +1,12 @@
 #ifndef __func__
 #define __func__
 
+#include <stdio.h>
 #include <stdbool.h>
 #include "datatype.h"
+
+
+// Tableau de chaînes de caractères correspondant aux mots-clés
 
 // Fonction pour vérifier si un mot est un mot-clé
 bool isKeyword(const char *word) {
@@ -20,9 +24,9 @@ bool isKeyword(const char *word) {
 }
 
 // Fonction principale pour l'analyse lexicale
-void analyseur_lex(const char *input) {
+void analyseur_lex(char input[]) {
 	//lautomate vas etre ici
-	printf("l\'automate n\'est pas encore cree com back later :)\n");
+	printf("%s\n",input);
 }
 
 

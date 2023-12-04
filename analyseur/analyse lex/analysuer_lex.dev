@@ -1,6 +1,6 @@
 [Project]
 FileName=analysuer_lex.dev
-Name=analysuer_lex
+Name=analyseur-lex
 Type=1
 Ver=2
 ObjFiles=
@@ -51,7 +51,7 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
-FileName=lex.c
+FileName=main.c
 CompileCpp=0
 Folder=
 Compile=1
@@ -62,6 +62,16 @@ BuildCmd=
 
 [Unit2]
 FileName=fonctions.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=fonctions.h
 CompileCpp=0
 Folder=
 Compile=1

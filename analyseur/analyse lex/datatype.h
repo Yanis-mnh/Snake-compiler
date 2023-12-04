@@ -1,3 +1,6 @@
+#ifndef __dataType__
+	#define __dataType__
+
 /* Token definitions */
 typedef enum {
     TOKEN_BEGIN,
@@ -13,10 +16,9 @@ typedef enum {
 	TOKEN_NUMBER,
     TOKEN_REAL_NUMBER
 }tokenName;
-// Tableau de chaînes de caractères correspondant aux mots-clés
-const char *keywords[]= {
+const char *keywords[13] ={
     "Snk_Begin",
-    "Snk_Int",
+    "Snk_Int",	
     "Snk_Real",
     "Set",
     "If",
@@ -44,3 +46,4 @@ typedef struct{
 	char *value;
 }idToken;
 
+#endif
