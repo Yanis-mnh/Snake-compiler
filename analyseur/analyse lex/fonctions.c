@@ -1,11 +1,13 @@
+#ifndef __func__
+#define __func__
+
 #include <stdbool.h>
 #include "datatype.h"
-#include <ctype.h>
 
 // Fonction pour vérifier si un mot est un mot-clé
 bool isKeyword(const char *word) {
     // Liste de mots-clés
-    const char *keywords[] = {"Snk_Begin", "Snk_Int", "Snk_Real", "Set", "If", "Else", "Begin", "Get","Snk_Print","$$","Snk_End",",","$"};
+    //keywords (la liste) est dans "datatype.h"
 
     // Vérification si le mot est un mot-clé
     int i;
@@ -25,11 +27,4 @@ void analyseur_lex(const char *input) {
 
 
 
-
-
-
-
-
-
-
-
+#endif

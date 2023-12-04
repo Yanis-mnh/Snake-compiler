@@ -4,6 +4,7 @@
 	#include "datatype.h"
 
 
-void test();
+void test(void);
+void analyseur_lex(void);
 
 #endif

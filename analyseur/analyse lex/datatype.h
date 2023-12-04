@@ -14,7 +14,7 @@ typedef enum {
     TOKEN_REAL_NUMBER
 }tokenName;
 // Tableau de chaînes de caractères correspondant aux mots-clés
-const char *keywords[12] = {
+const char *keywords[]= {
     "Snk_Begin",
     "Snk_Int",
     "Snk_Real",
@@ -30,6 +30,7 @@ const char *keywords[12] = {
     "Real_Number"
 };
 // state possibles de l'automate se2 go brrrrrrrrrrrrrr
+// les etat ne sont pas encore fini we nead to make an automate for the snake lang
 typedef enum {
     START,
     IDENTIFIER,
