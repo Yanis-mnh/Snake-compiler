@@ -17,14 +17,6 @@ typedef enum {
     TOKEN_END
 }tokenName;
 
-// state possibles de l'automate se2 go brrrrrrrrrrrrrr
-// les etat ne sont pas encore fini we nead to make an automate for the snake lang
-typedef enum {
-    START,
-    IDENTIFIER,
-    NUMBER,
-    INVALID
-} State;
 
 
 //strcuteur d'un id

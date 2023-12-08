@@ -7,6 +7,11 @@ enum file_option{
 	save_as_file,
 	quit
 	}
+enum analysuer{
+	anal_lex,
+	anal_syn,
+	anal_sem
+	}
 
 @onready var dropMenuFile = $"title bar/MenuBar/HBoxContainer/MenuButton"
 @onready var open_file_window = $OpenFileWindow
@@ -34,13 +39,18 @@ func on_analyse(id):
 	save_file()
 	if(current_file == "Untitled"):
 		return
-	var exePath = "analyseur/analyse lex/main.exe"
-	var arg = [current_file]
-	var out_put=[]
-	var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
-	print(out_put)
-	OS.kill(pid);
-	
+	match id:
+		analysuer.anal_lex:
+			var exePath = "analyseur/analyse lex/analysuer_lex.exe"
+			var arg = [current_file]
+			var out_put=[]
+			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
+			print(out_put)
+			OS.kill(pid);
+		analysuer.anal_syn:
+			print("analyse syntaxique")
+		analysuer.anal_sem:
+			print("analyse semantique")
 
 #function de getion des button fichier
 func on_item_pressed(id):

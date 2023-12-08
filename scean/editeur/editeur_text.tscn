@@ -120,6 +120,7 @@ offset_left = 8.0
 offset_right = -810.0
 offset_bottom = 43.0
 grow_horizontal = 2
+mouse_filter = 1
 flat = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuBar"]
@@ -161,7 +162,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 51.0
+offset_top = 56.0
 offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
@@ -169,6 +170,16 @@ grow_vertical = 2
 draw_tabs = true
 scroll_smooth = true
 script = ExtResource("3_dib2g")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test ceci est un test"
 
 [node name="OpenFileWindow" type="FileDialog" parent="."]
 initial_position = 1

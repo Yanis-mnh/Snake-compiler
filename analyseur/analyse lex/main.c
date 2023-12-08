@@ -17,23 +17,15 @@
 int main(int argc, char *argv[]) {
 	
 	//juste for testing this line should be changed later
-	char test[20] = "test001.snk";
-	char programme[300];
-	char c;
 	
+	argv[1] = "test001.snk";
+	FILE *file = fopen(argv[1],"r");
 	
-	FILE *file;
-	
-	
-	file = fopen(test,"r");
 	if(file == NULL)
 	{
 		printf("ERROR D'OVERTURE DU FICHIER ");
 		exit(0);
 	}
-	
-	//juste un test pour ouvrire le fichier 
-	int i=0;
 	
 	analyseur_lex(file);
 	fclose(file);

@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="miniProjetComp"
-run/main_scene="res://scean/file_edit_scean.tscn"
+run/main_scene="res://scean/editeur/editeur_text.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="res://snake.png"
+boot_splash/fullsize=false
+config/icon="res://snakeIcon.svg"
 
 [display]
 
