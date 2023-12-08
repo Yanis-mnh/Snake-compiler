@@ -5,6 +5,6 @@
 
 
 void test(void);
-void analyseur_lex();
+void analyseur_lex(FILE *file);
 
 #endif

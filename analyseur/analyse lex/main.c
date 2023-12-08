@@ -34,12 +34,8 @@ int main(int argc, char *argv[]) {
 	
 	//juste un test pour ouvrire le fichier 
 	int i=0;
-	while((c = fgetc(file) ) != EOF)
-	{
-		programme[i] = c;
-		i++;
-	}
-	analyseur_lex(programme);
+	
+	analyseur_lex(file);
 	fclose(file);
 	return 0;
 }
