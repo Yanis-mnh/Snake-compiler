@@ -18,6 +18,8 @@ enum analysuer{
 @onready var save_file_window = $SaveFileWindow
 @onready var menu_button_analyse = $"title bar/MenuBar/HBoxContainer/MenuButtonAnalyse"
 @onready var text_edit = $TextEdit
+@onready var title = $"title bar/title"
+
 
 var app_name = "snake"
 var current_file = "Untitled"
@@ -31,7 +33,7 @@ func _ready():
 
 
 func update_window_name():
-	DisplayServer.window_set_title(app_name +" _ "+ current_file)
+	title.text = app_name +" _ "+ current_file
 
 
 #les option de l'analyseur 
