@@ -2,12 +2,20 @@
 	#define __LinkedList__
 
 
+
+
+
 typedef struct list{
 	int token;
 	int nbrLine;
 	struct list *next;
 	struct list *queue;
 }list;
+
+struct ptr{
+	list *Tete;
+	list *Queue;	
+};
 
 //declaration of fonctions linked liste
 void add_to_liste(list **tete,list **queue,int token,int nbrLine);

@@ -102,8 +102,9 @@ void analyseur_lex(FILE *file) {
     char mot[MAX_WORD]; 
     int i = 0;
     char c;
-	list *tete = NULL;
-	list *queue = NULL;
+	struct ptr ptr;
+	ptr.Queue = NULL;
+	ptr.Tete = NULL;
 
     while ((c = fgetc(file)) != EOF ) {
 
@@ -132,13 +133,11 @@ void analyseur_lex(FILE *file) {
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
-    add_to_liste(&tete,&queue,1,0);
-    add_to_liste(&tete,&queue,2,0);
-    add_to_liste(&tete,&queue,3,0);
-    add_to_liste(&tete,&queue,4,0);
-    affiche(tete);
-    free_liste(tete);
+    add_to_liste(&ptr.Tete,&ptr.Queue,1,0);
+    add_to_liste(&ptr.Tete,&ptr.Queue,2,0);
+    add_to_liste(&ptr.Tete,&ptr.Queue,3,0);
+    add_to_liste(&ptr.Tete,&ptr.Queue,4,0);
+    add_to_liste(&ptr.Tete,&ptr.Queue,5,0);
+    affiche(ptr.Tete);
+    free_liste(ptr.Tete);
 }
-
-
-
