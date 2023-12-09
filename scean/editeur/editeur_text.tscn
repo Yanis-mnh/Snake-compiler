@@ -1,28 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=11 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
-[ext_resource type="FontFile" uid="uid://cr8ee23yrkav0" path="res://assets/font_M_PLUS_Rounded_1c/MPLUSRounded1c-Bold.ttf" id="1_y4xlf"]
+[ext_resource type="Theme" uid="uid://dfns3jqit1rm4" path="res://editeur_text.tres" id="1_mcjvt"]
 [ext_resource type="Script" path="res://scean/editeur/windowGestion.gd" id="2_s6d8p"]
 [ext_resource type="Texture2D" uid="uid://cqrdc55u38xvy" path="res://assets/icons/minimize.png" id="3_bwlfh"]
 [ext_resource type="Script" path="res://scean/editeur/TextEdit.gd" id="3_dib2g"]
 [ext_resource type="Script" path="res://scean/editeur/title bar.gd" id="3_n8v7h"]
 [ext_resource type="Texture2D" uid="uid://6gh0fngyee3q" path="res://assets/icons/close_icon.png" id="4_eeqtw"]
 [ext_resource type="Texture2D" uid="uid://chmaqbsfuloim" path="res://assets/icons/maximize.png" id="4_pior6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydbly"]
-bg_color = Color(0.4, 0.4, 0.4, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhtac"]
-
-[sub_resource type="Theme" id="Theme_wuoui"]
-Button/colors/font_hover_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
-Button/fonts/font = ExtResource("1_y4xlf")
-Button/styles/hover = SubResource("StyleBoxFlat_ydbly")
-Button/styles/normal = SubResource("StyleBoxFlat_vhtac")
-MenuButton/colors/font_hover_color = Color(0.764706, 0.764706, 0.764706, 1)
-MenuButton/colors/font_pressed_color = Color(0.764706, 0.764706, 0.764706, 1)
-TextEdit/constants/line_spacing = 10
-TextEdit/fonts/font = ExtResource("1_y4xlf")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfjcw"]
 bg_color = Color(0.890196, 0.156863, 0.172549, 1)
@@ -38,7 +23,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_wuoui")
 script = ExtResource("1_enrew")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -48,14 +32,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0431373, 0.0941176, 0.180392, 1)
+color = Color(0.0862745, 0.101961, 0.188235, 1)
 
 [node name="title bar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 43.0
+offset_bottom = 31.0
 grow_horizontal = 2
+theme = ExtResource("1_mcjvt")
 script = ExtResource("3_n8v7h")
 
 [node name="ColorRect" type="ColorRect" parent="title bar"]
@@ -84,28 +69,28 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -136.0
-offset_top = 8.0
+offset_top = 4.0
 offset_right = -8.0
-offset_bottom = 38.0
+offset_bottom = 28.0
 grow_horizontal = 0
 alignment = 2
 
 [node name="minimaze" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(37, 30)
+custom_minimum_size = Vector2(35, 24)
 layout_mode = 2
 icon = ExtResource("3_bwlfh")
 icon_alignment = 1
 expand_icon = true
 
 [node name="big_small" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(37, 30)
+custom_minimum_size = Vector2(35, 24)
 layout_mode = 2
 icon = ExtResource("4_pior6")
 icon_alignment = 1
 expand_icon = true
 
 [node name="Close" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(37, 30)
+custom_minimum_size = Vector2(35, 24)
 layout_mode = 2
 theme = SubResource("Theme_i77d8")
 icon = ExtResource("4_eeqtw")
@@ -124,11 +109,16 @@ mouse_filter = 1
 flat = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuBar"]
-layout_mode = 0
-offset_right = 376.0
-offset_bottom = 51.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.498
+anchor_bottom = 0.72093
+offset_right = 95.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MenuButton" type="MenuButton" parent="title bar/MenuBar/HBoxContainer"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 text = "File"
 switch_on_hover = true
@@ -145,6 +135,7 @@ popup/item_4/text = "Quit"
 popup/item_4/id = 4
 
 [node name="MenuButtonAnalyse" type="MenuButton" parent="title bar/MenuBar/HBoxContainer"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 text = "Compile"
 switch_on_hover = true
@@ -162,7 +153,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 56.0
+offset_top = 40.0
 offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2

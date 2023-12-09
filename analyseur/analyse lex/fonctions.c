@@ -73,6 +73,12 @@ bool isNum(char *s)
 	return true;
 }
 
+//work in progress
+bool isValideId()
+{
+	
+}
+
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
     char mot[MAX_WORD]; 
@@ -81,18 +87,20 @@ void analyseur_lex(FILE *file) {
 
     while ((c = fgetc(file)) != EOF ) {
     	//verifier si cest un symbole cle
-    	
-    	
-        if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)) {
-            if (i > 0) { // Vérifier si le mot n'est pas vide
+        if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)) 
+		{
+            if (i > 0) 
+			{ // Vérifier si le mot n'est pas vide
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 if (isKeyword(mot)) 
                     printf("Mot-cle trouve : %s\n", mot);
                 else if ( isNum(mot) )
-                	printf("its a number %d\n",atoi(mot));
+                	printf("its a number %s\n",mot);
                 else
 					printf("id : %s\n",mot);
 			}
+			if (isSymboleCle(c))
+				printf("cest un symbole: %c\n",c);
             i = 0; // Réinitialiser l'indice du mot
         }
 		else 

@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dfns3jqit1rm4"]
+
+[ext_resource type="FontFile" uid="uid://cr8ee23yrkav0" path="res://assets/font_M_PLUS_Rounded_1c/MPLUSRounded1c-Bold.ttf" id="1_f0aiw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0xax"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydbly"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhtac"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[resource]
+Button/colors/font_hover_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
+Button/fonts/font = ExtResource("1_f0aiw")
+Button/styles/focus = SubResource("StyleBoxFlat_f0xax")
+Button/styles/hover = SubResource("StyleBoxFlat_ydbly")
+Button/styles/normal = SubResource("StyleBoxFlat_vhtac")
+MenuButton/colors/font_hover_color = Color(0.764706, 0.764706, 0.764706, 1)
+MenuButton/colors/font_pressed_color = Color(0.764706, 0.764706, 0.764706, 1)
+TextEdit/constants/line_spacing = 10
+TextEdit/fonts/font = ExtResource("1_f0aiw")
