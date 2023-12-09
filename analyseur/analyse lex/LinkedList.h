@@ -6,10 +6,11 @@ typedef struct list{
 	int token;
 	int nbrLine;
 	struct list *next;
+	struct list *queue;
 }list;
 
 //declaration of fonctions linked liste
-void add_to_liste(list *tete,int token,int nbrLine);
+void add_to_liste(list **tete,list **queue,int token,int nbrLine);
 void affiche(list *tete);
 void free_liste(list *tete);
 

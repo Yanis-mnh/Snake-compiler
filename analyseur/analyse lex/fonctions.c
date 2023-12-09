@@ -10,7 +10,6 @@
 
 
 
-// Tableau de chaînes de caractères correspondant aux mots-clés
 
 // Fonction pour vérifier si un mot est un mot-clé
 bool isKeyword(const char *word) {
@@ -74,38 +73,71 @@ bool isNum(char *s)
 }
 
 //work in progress
-bool isValideId()
+bool isValideId(char *s)
 {
+	int i =1;
+	if( !isalpha(s[0]) && s[0] != '_' )
+		return false;
 	
+	for(;i<strlen(s);i++)
+	{
+		if( !isalnum(s[0]) && s[0] != '_'  )
+			return false;
+	}
+	return true;
 }
-
+bool isCommentaire(char c,FILE *f)
+{
+	if(c == '$' && fgetc(f) == '$'  )
+		return true;
+	return false;
+		
+}
+bool isString()
+{
+	printf("String work in progress\n");
+}
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
     char mot[MAX_WORD]; 
     int i = 0;
     char c;
+	list *tete = NULL;
+	list *queue = NULL;
 
     while ((c = fgetc(file)) != EOF ) {
-    	//verifier si cest un symbole cle
-        if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)) 
+
+		
+		if(isCommentaire(c,file) )
+			while( (c = fgetc(file)) != EOF && c != '\n'  );// do nothing
+        if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)  ) 
 		{
-            if (i > 0) 
-			{ // Vérifier si le mot n'est pas vide
+            if (i > 0) // Vérifier si le mot n'est pas vide
+			{ 
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
+                
                 if (isKeyword(mot)) 
                     printf("Mot-cle trouve : %s\n", mot);
                 else if ( isNum(mot) )
                 	printf("its a number %s\n",mot);
-                else
+                else if(isValideId(mot))
 					printf("id : %s\n",mot);
+				else
+					printf("erreur %s\n",mot);
 			}
-			if (isSymboleCle(c))
+			if (isSymboleCle(c) )
 				printf("cest un symbole: %c\n",c);
             i = 0; // Réinitialiser l'indice du mot
         }
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
+    add_to_liste(&tete,&queue,1,0);
+    add_to_liste(&tete,&queue,2,0);
+    add_to_liste(&tete,&queue,3,0);
+    add_to_liste(&tete,&queue,4,0);
+    affiche(tete);
+    free_liste(tete);
 }
 
 
