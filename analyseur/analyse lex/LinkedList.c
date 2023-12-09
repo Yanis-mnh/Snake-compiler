@@ -18,9 +18,15 @@ void add_to_liste(list **tete,list **queue,int token,int nbrLine)
 		nov->nbrLine = nbrLine;
 		*tete = nov;
 		*queue = nov;
-	}else
+	}
+	//return later to fic this shit
+	else
 	{
-		
+		(*queue)->next = nov;
+		nov->next = NULL;
+		nov->token = token;
+		nov->nbrLine = nbrLine;
+		*queue = nov;
 	}
 	
 	
@@ -30,10 +36,12 @@ void affiche(list *tete)
 {
 	printf("affichage de la liste: \n");
 	list *ptr = tete;
-	while(ptr != NULL)
+	int i=0;
+	while(ptr != NULL )
 	{
 		printf("%d -> ",ptr->token);
 		ptr = ptr->next;
+		i++;
 	}
 	printf("NULL\n");
 }
