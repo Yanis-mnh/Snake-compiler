@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "datatype.h"
 #include "LinkedList.h"
@@ -15,10 +16,11 @@
 bool isKeyword(const char *word) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
-	const char *keywords[13] ={
+	const char *keywords[14] ={
 	    "Snk_Begin",
 	    "Snk_Int",	
 	    "Snk_Real",
+	    "Begin",
 	    "Set",
 	    "If",
 	    "Else",
@@ -59,6 +61,17 @@ bool isSymboleCle(char symbole) {
     }
     return false;
 }
+//est il a numero (real et entier)
+bool isNum(char *s)
+{
+	int i;
+	for(i=0;i<strlen(s);i++)
+	{
+		if(!isdigit(s[i]) && s[i] != '.')
+			return false;
+	}
+	return true;
+}
 
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
@@ -69,18 +82,20 @@ void analyseur_lex(FILE *file) {
     while ((c = fgetc(file)) != EOF ) {
     	//verifier si cest un symbole cle
     	
-    	if ( isSymboleCle(c))
-            printf("symbole trouve : %c\n", c);
+    	
         if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)) {
             if (i > 0) { // Vérifier si le mot n'est pas vide
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 if (isKeyword(mot)) 
                     printf("Mot-cle trouve : %s\n", mot);
+                else if ( isNum(mot) )
+                	printf("its a number %d\n",atoi(mot));
                 else
-                	printf("id or error for the moment\n");
+					printf("id : %s\n",mot);
 			}
             i = 0; // Réinitialiser l'indice du mot
-        }else 
+        }
+		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
 }

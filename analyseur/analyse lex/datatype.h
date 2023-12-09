@@ -3,9 +3,10 @@
 
 /* Token definitions */
 typedef enum {
-    TOKEN_BEGIN,
+    TOKEN_SNK_BEGIN,
 	TOKEN_INT,
 	TOKEN_REAL,
+	TOKEN_BEGIN,
 	TOKEN_SET,
 	TOKEN_IF,
 	TOKEN_ELSE,
@@ -14,7 +15,7 @@ typedef enum {
 	TOKEN_IDENTIFIER,
 	TOKEN_NUMBER,
     TOKEN_REAL_NUMBER,
-    TOKEN_END
+    TOKEN_SNK_END
 }tokenName;
 
 
