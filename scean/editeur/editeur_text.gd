@@ -18,7 +18,9 @@ enum analysuer{
 @onready var save_file_window = $SaveFileWindow
 @onready var menu_button_analyse = $"title bar/MenuBar/HBoxContainer/MenuButtonAnalyse"
 @onready var text_edit = $TextEdit
+@onready var console_text = $Console/consoleText
 @onready var title = $"title bar/title"
+@onready var console = $Console
 
 
 var app_name = "snake"
@@ -33,7 +35,7 @@ func _ready():
 
 
 func update_window_name():
-	title.text = app_name +" _ "+ current_file
+	DisplayServer.window_set_title(app_name +" _ "+ current_file)
 
 
 #les option de l'analyseur 
@@ -47,8 +49,11 @@ func on_analyse(id):
 			var arg = [current_file]
 			var out_put=[]
 			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
-			print(out_put)
+			var result:String = array_to_string(out_put)
+			console_text.text = result
+			print(result)
 			OS.kill(pid);
+			console.popup_centered()
 		analysuer.anal_syn:
 			print("analyse syntaxique")
 		analysuer.anal_sem:
@@ -73,7 +78,7 @@ func on_item_pressed(id):
 
 func _on_open_file_window_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
-	$TextEdit.text = file.get_as_text();
+	text_edit.text = file.get_as_text();
 	file.close()
 	current_file = path
 	update_window_name()
@@ -81,7 +86,7 @@ func _on_open_file_window_file_selected(path):
 
 func _on_save_file_window_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string($TextEdit.text)
+	file.store_string(text_edit.text)
 	file.close()
 	current_file = path
 	update_window_name()
@@ -92,7 +97,7 @@ func save_file():
 		save_file_window.popup_centered()
 		return
 	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string($TextEdit.text)
+	file.store_string(text_edit.text)
 	file.close()
 	app_name = "snake"
 	update_window_name()
@@ -102,3 +107,14 @@ func _on_text_edit_text_changed():
 	app_name = "(*) snake"
 	update_window_name()
 
+
+
+func array_to_string(arr: Array) -> String:
+	var s = ""
+	for i in arr:
+		s += String(i)
+	return s
+
+
+func _on_console_close_requested():
+	console.hide()

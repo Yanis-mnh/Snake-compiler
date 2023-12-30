@@ -1,20 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=5 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
 [ext_resource type="Theme" uid="uid://dfns3jqit1rm4" path="res://editeur_text.tres" id="1_mcjvt"]
-[ext_resource type="Script" path="res://scean/editeur/windowGestion.gd" id="2_s6d8p"]
-[ext_resource type="Texture2D" uid="uid://cqrdc55u38xvy" path="res://assets/icons/minimize.png" id="3_bwlfh"]
 [ext_resource type="Script" path="res://scean/editeur/TextEdit.gd" id="3_dib2g"]
-[ext_resource type="Script" path="res://scean/editeur/title bar.gd" id="3_n8v7h"]
-[ext_resource type="Texture2D" uid="uid://6gh0fngyee3q" path="res://assets/icons/close_icon.png" id="4_eeqtw"]
-[ext_resource type="Texture2D" uid="uid://chmaqbsfuloim" path="res://assets/icons/maximize.png" id="4_pior6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfjcw"]
-bg_color = Color(0.890196, 0.156863, 0.172549, 1)
-
-[sub_resource type="Theme" id="Theme_i77d8"]
-Button/constants/outline_size = 0
-Button/styles/hover = SubResource("StyleBoxFlat_bfjcw")
+[ext_resource type="Script" path="res://scean/editeur/setSizeconsoleText.gd" id="4_x4inc"]
 
 [node name="editeur_text" type="Control"]
 layout_mode = 3
@@ -34,6 +23,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0862745, 0.101961, 0.188235, 1)
 
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 2
+anchor_top = 0.048
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.104
+size_flags_horizontal = 2
+draw_tabs = true
+scroll_smooth = true
+script = ExtResource("3_dib2g")
+
 [node name="title bar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 10
@@ -41,11 +41,10 @@ anchor_right = 1.0
 offset_bottom = 31.0
 grow_horizontal = 2
 theme = ExtResource("1_mcjvt")
-script = ExtResource("3_n8v7h")
 
 [node name="ColorRect" type="ColorRect" parent="title bar"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -53,57 +52,13 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 
-[node name="MenuWindow" type="MenuBar" parent="title bar"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -136.0
-offset_bottom = 43.0
-grow_horizontal = 0
-script = ExtResource("2_s6d8p")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuWindow"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -136.0
-offset_top = 4.0
-offset_right = -8.0
-offset_bottom = 28.0
-grow_horizontal = 0
-alignment = 2
-
-[node name="minimaze" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(35, 24)
-layout_mode = 2
-icon = ExtResource("3_bwlfh")
-icon_alignment = 1
-expand_icon = true
-
-[node name="big_small" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(35, 24)
-layout_mode = 2
-icon = ExtResource("4_pior6")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Close" type="Button" parent="title bar/MenuWindow/HBoxContainer"]
-custom_minimum_size = Vector2(35, 24)
-layout_mode = 2
-theme = SubResource("Theme_i77d8")
-icon = ExtResource("4_eeqtw")
-icon_alignment = 1
-expand_icon = true
-
 [node name="MenuBar" type="MenuBar" parent="title bar"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 8.0
 offset_right = -810.0
-offset_bottom = 43.0
+offset_bottom = 31.0
 grow_horizontal = 2
 mouse_filter = 1
 flat = true
@@ -111,9 +66,12 @@ flat = true
 [node name="HBoxContainer" type="HBoxContainer" parent="title bar/MenuBar"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.498
-anchor_bottom = 0.72093
+anchor_top = -0.0322581
+anchor_right = 0.497006
+anchor_bottom = 0.935484
+offset_top = 1.0
 offset_right = 95.0
+offset_bottom = 1.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
@@ -161,31 +119,6 @@ text = "snake"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 40.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-draw_tabs = true
-scroll_smooth = true
-script = ExtResource("3_dib2g")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test ceci est un test"
-
 [node name="OpenFileWindow" type="FileDialog" parent="."]
 initial_position = 1
 title = "Open a File"
@@ -206,11 +139,20 @@ cancel_button_text = "Anuller"
 access = 2
 filters = PackedStringArray("..snk")
 
-[connection signal="mouse_entered" from="title bar" to="title bar" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="title bar" to="title bar" method="_on_mouse_exited"]
-[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/minimaze" to="title bar/MenuWindow" method="_on_minimaze_pressed"]
-[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/big_small" to="title bar/MenuWindow" method="_on_big_small_pressed"]
-[connection signal="pressed" from="title bar/MenuWindow/HBoxContainer/Close" to="title bar/MenuWindow" method="_on_close_pressed"]
+[node name="Console" type="Window" parent="."]
+initial_position = 2
+title = "Console"
+size = Vector2i(500, 500)
+visible = false
+min_size = Vector2i(250, 250)
+
+[node name="consoleText" type="RichTextLabel" parent="Console"]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "jdskaldjaksld"
+script = ExtResource("4_x4inc")
+
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="file_selected" from="OpenFileWindow" to="." method="_on_open_file_window_file_selected"]
 [connection signal="file_selected" from="SaveFileWindow" to="." method="_on_save_file_window_file_selected"]
+[connection signal="close_requested" from="Console" to="." method="_on_console_close_requested"]

@@ -43,8 +43,7 @@ bool isKeyword(const char *word) {
 }
 bool isSymboleCle(char symbole) {
 	const char KEYSYM[7] ={
-	    '$',	
-	    '\"',
+	    '$',
 	    '[',
 	    ']',
 	    ',',
@@ -93,36 +92,58 @@ bool isCommentaire(char c,FILE *f)
 	return false;
 		
 }
-bool isString()
-{
-	printf("String work in progress\n");
-}
+
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
+	
+	// creation dune liste de token
+	
+	token _toekn;
+	
     char mot[MAX_WORD]; 
-    int i = 0;
+    
     char c;
+	
 	struct ptr ptr;
 	ptr.Queue = NULL;
 	ptr.Tete = NULL;
-
+	int i = 0;
     while ((c = fgetc(file)) != EOF ) {
-
 		
 		if(isCommentaire(c,file) )
 			while( (c = fgetc(file)) != EOF && c != '\n'  );// do nothing
-        if (c == '\n' || c == ' ' || c == '\t'  || isSymboleCle(c)  ) 
+        if (isspace(c)  || isSymboleCle(c) ) 
 		{
             if (i > 0) // Vérifier si le mot n'est pas vide
 			{ 
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 
                 if (isKeyword(mot)) 
-                    printf("Mot-cle trouve : %s\n", mot);
+                {
+                	printf("Mot-cle trouve : %s\n", mot);
+                	
+				}
                 else if ( isNum(mot) )
                 	printf("its a number %s\n",mot);
                 else if(isValideId(mot))
 					printf("id : %s\n",mot);
+				//fix this shit later
+				else if(c == '\"'  )
+				{
+					char *s; //contien le string
+					int j = 0;
+					while( (c = fgetc(file))  != EOF && c != '\"'  )
+					{
+						if (c == '\"')
+							break;
+						s[j] = c;
+						j++;
+					}
+					if(c == '\"')
+						printf("string trouver : %s\n",s);
+					else
+						printf("erreur \" monquante\n");
+				}
 				else
 					printf("erreur %s\n",mot);
 			}
@@ -133,11 +154,8 @@ void analyseur_lex(FILE *file) {
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
-    add_to_liste(&ptr.Tete,&ptr.Queue,1,0);
-    add_to_liste(&ptr.Tete,&ptr.Queue,2,0);
-    add_to_liste(&ptr.Tete,&ptr.Queue,3,0);
-    add_to_liste(&ptr.Tete,&ptr.Queue,4,0);
-    add_to_liste(&ptr.Tete,&ptr.Queue,5,0);
-    affiche(ptr.Tete);
-    free_liste(ptr.Tete);
+    
+    
+    
+    
 }

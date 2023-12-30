@@ -13,13 +13,14 @@ config_version=5
 config/name="miniProjetComp"
 run/main_scene="res://scean/editeur/editeur_text.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://snake.png"
 boot_splash/fullsize=false
-config/icon="res://snakeIcon.svg"
+config/icon="res://snakeHR.png"
 
 [display]
 
-window/size/borderless=true
+window/subwindows/embed_subwindows=false
 window/stretch/aspect="expand"
 
 [input]

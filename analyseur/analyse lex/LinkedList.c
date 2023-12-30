@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void add_to_liste(list **tete,list **queue,int token,int nbrLine)
+void add_to_liste(list **tete,list **queue,token _token,int nbrLine)
 {
 	list *nov = (list *)malloc(sizeof(list));
 	if(nov == NULL)
@@ -14,7 +14,7 @@ void add_to_liste(list **tete,list **queue,int token,int nbrLine)
 	if(*tete == NULL)
 	{
 		nov->next = *tete;
-		nov->token = token;
+		nov->_token = _token;
 		nov->nbrLine = nbrLine;
 		*tete = nov;
 		*queue = nov;
@@ -24,7 +24,7 @@ void add_to_liste(list **tete,list **queue,int token,int nbrLine)
 	{
 		(*queue)->next = nov;
 		nov->next = NULL;
-		nov->token = token;
+		nov->_token = _token;
 		nov->nbrLine = nbrLine;
 		*queue = nov;
 	}
@@ -39,7 +39,7 @@ void affiche(list *tete)
 	int i=0;
 	while(ptr != NULL )
 	{
-		printf("%d -> ",ptr->token);
+		printf("%s -> ",ptr->_token);
 		ptr = ptr->next;
 		i++;
 	}
@@ -51,7 +51,7 @@ void free_liste(list *tete)
 	struct list *ptr = tete;
 	while(ptr != NULL)
 	{
-		printf("free(%d)\t",tete->token);
+		printf("free(%d)\t",tete->_token);
 		ptr = tete->next;
 		free(tete);
 		tete = ptr;

@@ -1,7 +1,13 @@
 extends TextEdit
 
 
-func _ready():	
+
+
+func _ready():
+	self.custom_minimum_size.x = DisplayServer.window_get_size().x*0.75;
+	self.custom_minimum_size.y = DisplayServer.window_get_size().y;
+	
+	#set the color theme for the text editor (text)
 	var highlighter := CodeHighlighter.new()
 	var container:Array = ["Snk_End","Snk_Begin"]
 	var declaration:Array = ["Snk_Real","Snk_Int"]
@@ -12,6 +18,7 @@ func _ready():
 		highlighter.add_keyword_color(d, Color("#DF826C"))
 	highlighter.add_color_region("$$","",Color("#A9A9A9"),true);
 	syntax_highlighter = highlighter
+
 
 
 

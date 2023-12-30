@@ -16,13 +16,14 @@ typedef enum {
 	TOKEN_NUMBER,
     TOKEN_REAL_NUMBER,
     TOKEN_SNK_END
-}tokenName;
+}tokenType;
 
 
 
 //strcuteur d'un id
 typedef struct{
+	tokenType type;
 	char *value;
-}idToken;
+}token;
 
 #endif
