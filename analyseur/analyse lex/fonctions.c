@@ -117,13 +117,9 @@ bool isValideId(char *s)
 }
 bool isCommentaire(char c,FILE *f)
 {
-	FILE *temp = f;
-	if(c == '$' && fgetc(temp) == '$'  )
-	{
-		fclose(temp);
+	if(c == '$' && fgetc(f) == '$'  )
 		return true;
-	}
-	fclose(temp); 
+	
 	return false;
 		
 }
@@ -133,8 +129,6 @@ void analyseur_lex(FILE *file) {
 	
 	// creation dune liste de token
 	init_list(&tokenList);
-	
-	
     char mot[MAX_WORD]; 
     
     char c;
@@ -146,8 +140,12 @@ void analyseur_lex(FILE *file) {
 		
 		if(isCommentaire(c,file) )
 			while( (c = fgetc(file)) != EOF && c != '\n'  );// do nothing
+		
+		
+		
         if (isspace(c)  || isSymboleCle(c) ) 
 		{
+		
             if (i > 0) // Vérifier si le mot n'est pas vide
 			{ 
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
@@ -164,22 +162,7 @@ void analyseur_lex(FILE *file) {
                 else if(isValideId(mot))
 					printf("id : %s\n",mot);
 				//fix this shit later
-				else if(c == '\"'  )
-				{
-					char *s; //contien le string
-					int j = 0;
-					while( (c = fgetc(file))  != EOF && c != '\"'  )
-					{
-						if (c == '\"')
-							break;
-						s[j] = c;
-						j++;
-					}
-					if(c == '\"')
-						printf("string trouver : %s\n",s);
-					else
-						printf("erreur \" monquante\n");
-				}
+				
 				else
 					printf("erreur %s\n",mot);
 			}
@@ -187,14 +170,31 @@ void analyseur_lex(FILE *file) {
 				printf("cest un symbole: %c\n",c);
             i = 0; // Réinitialiser l'indice du mot
         }
+        else if(c == '"'  )
+		{
+			char s[100]; //contien le string
+			int j = 0;
+			while( (c = fgetc(file)) != EOF && c != '"')
+			{
+				if (c == '\"')
+					break;
+				s[j] = c;
+				j++;
+			}
+			s[j] = '\0';
+			if(c == '"')
+				printf("string trouver : %s\n",s);
+			else
+			{
+				printf("erreur \" monquante\n");
+				return;
+			}
+		}
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
     
     
     free_memory(&tokenList);
-    
-    
-    
     
 }
