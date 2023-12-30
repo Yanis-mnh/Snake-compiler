@@ -117,8 +117,13 @@ bool isValideId(char *s)
 }
 bool isCommentaire(char c,FILE *f)
 {
-	if(c == '$' && fgetc(f) == '$'  )
+	FILE *temp = f;
+	if(c == '$' && fgetc(temp) == '$'  )
+	{
+		fclose(temp);
 		return true;
+	}
+	fclose(temp); 
 	return false;
 		
 }
