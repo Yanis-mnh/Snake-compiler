@@ -149,7 +149,6 @@ min_size = Vector2i(250, 250)
 [node name="consoleText" type="RichTextLabel" parent="Console"]
 offset_right = 40.0
 offset_bottom = 40.0
-text = "jdskaldjaksld"
 script = ExtResource("4_x4inc")
 
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]

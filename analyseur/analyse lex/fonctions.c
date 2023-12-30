@@ -2,20 +2,21 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #include "datatype.h"
-#include "LinkedList.h"
+#include "tokenList.h"
 
 #define MAX_WORD 50
 
 
-
+struct list tokenList;
 
 // Fonction pour vérifier si un mot est un mot-clé
-bool isKeyword(const char *word) {
+bool isKeyword(const char *word ) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
-	const char *keywords[14] ={
+	const char *keywords[10] ={
 	    "Snk_Begin",
 	    "Snk_Int",	
 	    "Snk_Real",
@@ -25,10 +26,6 @@ bool isKeyword(const char *word) {
 	    "Else",
 	    "Get",
 	    "Snk_Print",
-	    "$$",
-	    "Identifier",
-	    "Number",
-	    "Real_Number",
 	    "Snk_End"
 	};
 
@@ -36,6 +33,11 @@ bool isKeyword(const char *word) {
     int i;
 	for (i = 0; i < sizeof(keywords) / sizeof(keywords[0]); ++i) {
         if (strcmp(word, keywords[i]) == 0) {
+        	token *_token = malloc(sizeof(token));
+        	// i est nbr toekn type
+			_token->type = i;
+        	strcpy(_token->value , "");
+			add_to_liste(&tokenList,*_token,2);
             return true;
         }
     }
@@ -54,13 +56,17 @@ bool isSymboleCle(char symbole) {
     int i;
 	for (i = 0; i <= 6; i++) {
         if (symbole == KEYSYM[i]) {
+			token *_token = malloc(sizeof(token));
+        	_token->type = i+9;
+        	strcpy(_token->value , "");
+			add_to_liste(&tokenList,*_token,2);
             return true;
         }
     }
     return false;
 }
 //est il a numero (real et entier)
-bool isNum(char *s)
+bool isInt(char *s)
 {
 	int i;
 	for(i=0;i<strlen(s);i++)
@@ -68,6 +74,7 @@ bool isNum(char *s)
 		if(!isdigit(s[i]) && s[i] != '.')
 			return false;
 	}
+	
 	return true;
 }
 
@@ -97,16 +104,15 @@ bool isCommentaire(char c,FILE *f)
 void analyseur_lex(FILE *file) {
 	
 	// creation dune liste de token
+	init_list(&tokenList);
 	
-	token _toekn;
 	
     char mot[MAX_WORD]; 
     
     char c;
 	
-	struct ptr ptr;
-	ptr.Queue = NULL;
-	ptr.Tete = NULL;
+	
+	
 	int i = 0;
     while ((c = fgetc(file)) != EOF ) {
 		
@@ -154,6 +160,9 @@ void analyseur_lex(FILE *file) {
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
+    
+    
+    free_memory(&tokenList);
     
     
     
