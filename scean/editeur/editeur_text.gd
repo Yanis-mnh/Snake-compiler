@@ -33,7 +33,6 @@ func _ready():
 	dropMenuFile.get_popup().connect("id_pressed",on_item_pressed)
 	menu_button_analyse.get_popup().connect("id_pressed",on_analyse)
 
-
 func update_window_name():
 	DisplayServer.window_set_title(app_name +" _ "+ current_file)
 
@@ -48,16 +47,20 @@ func on_analyse(id):
 			var exePath = "analyseur/analyse lex/analysuer_lex.exe"
 			var arg = [current_file]
 			var out_put=[]
-			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
+			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
 			var result:String = array_to_string(out_put)
 			console_text.text = result
 			print(result)
 			OS.kill(pid);
 			console.popup_centered()
 		analysuer.anal_syn:
-			print("analyse syntaxique")
+			var result:String = "work in progress return later"
+			console_text.text = result
+			console.popup_centered()
 		analysuer.anal_sem:
-			print("analyse semantique")
+			var result:String = "work in progress return later"
+			console_text.text = result
+			console.popup_centered()
 
 #function de getion des button fichier
 func on_item_pressed(id):

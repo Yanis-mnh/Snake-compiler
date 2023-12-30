@@ -65,16 +65,39 @@ bool isSymboleCle(char symbole) {
     }
     return false;
 }
-//est il a numero (real et entier)
+//is an integer 
 bool isInt(char *s)
 {
 	int i;
 	for(i=0;i<strlen(s);i++)
 	{
-		if(!isdigit(s[i]) && s[i] != '.')
+		if(!isdigit(s[i]))
 			return false;
 	}
-	
+	token *_token = malloc(sizeof(token));
+    _token->type = TOKEN_INT;
+    strcpy(_token->value , s);
+	add_to_liste(&tokenList,*_token,2);
+	return true;
+}
+//is real
+bool isReal(char *s)
+{
+	int i;
+	bool vir = false;
+	for(i=0;i<strlen(s);i++)
+	{
+		if(s[i] == '.' && vir == true)
+			return false;
+		if(!isdigit(s[i]) && s[i] != '.')
+			return false;
+		if(s[i] == '.')
+			vir = true;
+	}
+	token *_token = malloc(sizeof(token));
+    _token->type = TOKEN_REAL;
+    strcpy(_token->value , s);
+	add_to_liste(&tokenList,*_token,2);
 	return true;
 }
 
@@ -126,11 +149,13 @@ void analyseur_lex(FILE *file) {
                 
                 if (isKeyword(mot)) 
                 {
-                	printf("Mot-cle trouve : %s\n", mot);
+                	printf("Mot-cle trouve: %s\n", mot);
                 	
 				}
-                else if ( isNum(mot) )
-                	printf("its a number %s\n",mot);
+				else if (isInt(mot))
+                	printf("cest un nombre entier:  %s\n",mot);
+                else if (isReal(mot))
+                	printf("cest un nombre real:  %s\n",mot);
                 else if(isValideId(mot))
 					printf("id : %s\n",mot);
 				//fix this shit later

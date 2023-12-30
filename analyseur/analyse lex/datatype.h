@@ -23,8 +23,8 @@ typedef enum {
 	TOKEN_INFERIOR,
 	//token for other start from 9 to 13??
 	TOKEN_IDENTIFIER,
-	TOKEN_INT_NUMBER,
-    TOKEN_REAL_NUMBER
+	TOKEN_INT,
+    TOKEN_REAL
     
 }tokenType;
 
