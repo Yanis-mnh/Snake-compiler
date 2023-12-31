@@ -172,7 +172,7 @@ void analyseur_lex(FILE *file) {
         }
         else if(c == '"'  )
 		{
-			char s[100]; //contien le string
+			char *s = (char*)malloc(sizeof(char)*100); //contien le string
 			int j = 0;
 			while( (c = fgetc(file)) != EOF && c != '"')
 			{
@@ -186,9 +186,10 @@ void analyseur_lex(FILE *file) {
 				printf("string trouver : %s\n",s);
 			else
 			{
-				printf("erreur \" monquante\n");
+				printf("Guillemet (\") manquant.\n");
 				return;
 			}
+			free(s);
 		}
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
