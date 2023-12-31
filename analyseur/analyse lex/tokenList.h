@@ -10,7 +10,7 @@
 typedef struct list{
 	token _token[maxToken];
 	int nbrToken;
-	int nbrLine;
+	int line;
 }list;
 
 

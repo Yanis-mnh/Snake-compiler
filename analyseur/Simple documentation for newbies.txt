@@ -1,0 +1,14 @@
+Pour obtenir la ligne d'une commande, vous devez disposer de la structure 'list' qui contient les valeurs suivantes :
+
+typedef struct list {
+    token _token[maxToken];
+    int nbrToken;
+    int line;
+} list;
+Cette structure est déclarée dans 'tokenList.h'. Assurez-vous d'inclure ce fichier via "../analyseur_lex/tokenList.h".
+
+Pour accéder à toutes les fonctions et données relatives aux tokens, incluez également "../analyseur_lex/datatype.h" pour obtenir les types de données et tous les tokens numérotés de 0 à je-ne-sais-quoi.
+
+Une fois ces étapes réalisées, vous pourrez obtenir le nombre de lignes et de tokens.
+Le code correspondant se trouve dans 'analyseur-syn'(te3 fethi mohamed roh dir copy past me 3yit naktem meme code 2 foit :) )
+

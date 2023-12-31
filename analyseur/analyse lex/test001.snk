@@ -10,7 +10,13 @@ Snk_Begin
 		Set k 43.5 $
 		Snk_Print x2, x3 $
  	End
-	Snk_Print " Hello :) " $
+	Snk_Print " Hello :)"  $
 	Snk_Print i,j $
+	While[i<50]
+	Begin
+		$$the result of i+1 will be stored in i
+		Add i,1$
+		Snk_Print i$
+	End
 $$ ceci est un commentaire
 Snk_End

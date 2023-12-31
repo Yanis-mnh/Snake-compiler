@@ -13,10 +13,10 @@
 struct list tokenList;
 
 // Fonction pour vérifier si un mot est un mot-clé
-bool isKeyword(const char *word ) {
+bool isKeyword(const char *word ,int line) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
-	const char *keywords[10] ={
+	const char *keywords[16] ={
 	    "Snk_Begin",
 	    "Snk_Int",	
 	    "Snk_Real",
@@ -26,7 +26,13 @@ bool isKeyword(const char *word ) {
 	    "Else",
 	    "Get",
 	    "Snk_Print",
-	    "Snk_End"
+	    "Snk_End",
+	    "While",
+	    "End",
+		"Add",
+	    "Sub",
+	    "Mul",
+	    "Div"
 	};
 
     // Vérification si le mot est un mot-clé
@@ -62,7 +68,7 @@ bool isKeyword(const char *word ) {
 					break;
 				}
 				case 6:{
-					printf("conditionnel sino");
+					printf("conditionnel sinon");
 					break;
 				}
 				case 7:{
@@ -77,6 +83,31 @@ bool isKeyword(const char *word ) {
 					printf("pour fin du programme");
 					break;
 				}
+				case 10:{
+					printf("pour une boucle while");
+					break;
+				}
+				case 11:{
+					printf("pour fin de block");
+					break;
+				}
+				case 12:{
+					printf("pour addition");
+					break;
+				}
+				case 13:{
+					printf("pour substraction");
+					break;
+				}
+				case 14:{
+					printf("pour multiplication");
+					break;
+				}
+				case 15:{
+					printf("pour division");
+					break;
+				}
+					
 			}
         	
         	printf("\n");
@@ -86,14 +117,14 @@ bool isKeyword(const char *word ) {
         	// i est nbr toekn type
 			_token->type = i;
         	strcpy(_token->value , "");
-			add_to_liste(&tokenList,*_token,2);
+			add_to_liste(&tokenList,*_token,line);
 			free(_token);
             return true;
         }
     }
     return false;
 }
-bool isSymboleCle(char symbole,bool affiche) {
+bool isSymboleCle(char symbole,bool affiche,int line) {
 	const char KEYSYM[6] ={
 	    '$',
 	    '[',
@@ -141,9 +172,9 @@ bool isSymboleCle(char symbole,bool affiche) {
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
-        	_token->type = i+9;
-        	strcpy(_token->value , "test");
-			add_to_liste(&tokenList,*_token,2);
+        	_token->type = i+16;
+        	strcpy(_token->value , "");
+			add_to_liste(&tokenList,*_token,line);
 			free(_token);
             return true;
         }
@@ -151,7 +182,7 @@ bool isSymboleCle(char symbole,bool affiche) {
     return false;
 }
 //is an integer 
-bool isInt(char *s)
+bool isInt(char *s,int line)
 {
 	int i;
 	for(i=0;i<strlen(s);i++)
@@ -162,12 +193,12 @@ bool isInt(char *s)
 	token *_token = malloc(sizeof(token));
     _token->type = TOKEN_INT;
     strcpy(_token->value , s);
-	add_to_liste(&tokenList,*_token,2);
+	add_to_liste(&tokenList,*_token,line);
 	free(_token);
 	return true;
 }
 //is real
-bool isReal(char *s)
+bool isReal(char *s,int line)
 {
 	int i;
 	bool vir = false;
@@ -183,13 +214,13 @@ bool isReal(char *s)
 	token *_token = malloc(sizeof(token));
     _token->type = TOKEN_REAL;
     strcpy(_token->value , s);
-	add_to_liste(&tokenList,*_token,2);
+	add_to_liste(&tokenList,*_token,line);
 	free(_token);
 	return true;
 }
 
 //work in progress
-bool isValideId(char *s)
+bool isValideId(char *s,int line)
 {
 	int i =1;
 	if( !isalpha(s[0]) && s[0] != '_' )
@@ -200,33 +231,49 @@ bool isValideId(char *s)
 		if( !isalnum(s[0]) && s[0] != '_'  )
 			return false;
 	}
+	token *_token = malloc(sizeof(token));
+    _token->type = TOKEN_IDENTIFIER;
+    strcpy(_token->value , s);
+	add_to_liste(&tokenList,*_token,2);
+	free(_token);
 	return true;
 }
-bool isCommentaire(char c,FILE *f)
-{
-	if(c == '$' && fgetc(f) == '$'  )
-		return true;
-	
-	return false;
-		
+
+bool isCommentaire(char c, FILE *f) {
+    
+
+    if (c == '$') {
+    	if( (c = fgetc(f)) == '$')
+    	{
+    		return true;	
+		}
+        else{
+        	ungetc(c,f);
+        	return false;
+		}
+    }
+    return false;
 }
 
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
-	
+		
 	// creation dune liste de token
 	init_list(&tokenList);
     char mot[MAX_WORD];
-    
     char c;
-	
 	bool endOfFile = false;
+	
+	int line = 1;
 	int i = 0;
+	printf("\n----------------line: %d-----------------------\n",line);
     while ( !endOfFile ) {
 		c = fgetc(file);
-
+		
 		if (c == EOF)
         	endOfFile = true;
+		
+	
 		
 		//ingorie les comantaire
 		if(isCommentaire(c,file) )
@@ -234,53 +281,73 @@ void analyseur_lex(FILE *file) {
 		
 		
 		
-        if (isspace(c)  || isSymboleCle(c,false) || c == EOF) 
+        if (isspace(c)  || isSymboleCle(c,false,line) || c == EOF) 
 		{
 		
             if (i > 0) // Vérifier si le mot n'est pas vide
 			{ 
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 
-                if (isKeyword(mot));
-				else if (isInt(mot))
+                if (isKeyword(mot,line));
+				else if (isInt(mot,line))
                 	printf("cest un nombre entier:  %s\n",mot);
-                else if (isReal(mot))
+                else if (isReal(mot,line))
                 	printf("cest un nombre real:  %s\n",mot);
-                else if(isValideId(mot))
-					printf("id : %s\n",mot);
+                else if(isValideId(mot,line))
+					printf("identificateur : %s\n",mot);
 				//fix this shit later
 				
 				else
-					printf("erreur %s\n",mot);
-				if (isSymboleCle(c,true));
+					printf("erreur %s dans la ligne: %d\n",mot,line);
 			}
+			if (isSymboleCle(c,true,line));
             i = 0; // Réinitialiser l'indice du mot
         }
         
         //pour les Strings
         else if(c == '"'  )
 		{
-			char *s = (char*)malloc(sizeof(char)*100); //contien le string
+			char *s = (char*)malloc(sizeof(char)*200); //contien le string
 			int j = 0;
 			while( (c = fgetc(file)) != EOF && c != '"')
 			{
-				if (c == '\"')
+				if (c == '\"' || j>100)
 					break;
 				s[j] = c;
 				j++;
 			}
 			s[j] = '\0';
 			if(c == '"')
-				printf("string trouver : %s\n",s);
-			else
 			{
-				printf("Guillemet (\") manquant.\n");
-				return;
+				token *_token = malloc(sizeof(token));
+			    _token->type = TOKEN_IDENTIFIER;
+			    strcpy(_token->value , s);
+				add_to_liste(&tokenList,*_token,line);
+				free(_token);
+				printf("string trouver : %s\n",s);
+			}
+			else
+			{	
+				printf("Guillemet (\") manquant ou taille de la chaine trop elevee dans la ligne  %d\n",line);
+				free(s);
+				exit(EXIT_FAILURE);
 			}
 			free(s);
 		}
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
+           	
+           	
+           	
+           	
+           	
+        if(c == '\n') //pour avoire le compt des ligne
+        {
+        	line++;
+        	printf("\n----------------line: %d-----------------------\n",line);
+
+		}
+        
         
     }
     
@@ -301,8 +368,5 @@ void analyseur_lex(FILE *file) {
 
 	
 	
-	
-	
-	
-    
+	free_memory(&tokenList);
 }

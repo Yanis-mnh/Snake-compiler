@@ -6,12 +6,12 @@
 
 void init_list(list *a)
 {
-	a->nbrLine=0;
+	a->line=0;
 	a->nbrToken = 0;
 	
 }
 
-void add_to_liste(list *a,token _token,int nbrLine)
+void add_to_liste(list *a,token _token,int line)
 {
 	if(a->nbrToken > maxToken)
 	{
@@ -22,6 +22,7 @@ void add_to_liste(list *a,token _token,int nbrLine)
 	
 	a->_token[a->nbrToken] = _token;	
 	a->nbrToken++;
+	a->line = line;
 	
 }
 
@@ -38,14 +39,7 @@ void affiche(list a)
 
 void free_memory(list *a)
 {
-	int i;
-	for(i=0;i<a->nbrToken;i++)
-	{
-		free(a);
-	}
+	//no nead to free memory cauz we dont care abouot youre RAM
+	//just jocking memory is free when when we addes _tokens 
 }
-
-
-
-
 
