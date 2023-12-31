@@ -1,0 +1,4 @@
+Snk_Begin 
+	Snk_Int x1,x2$
+	Set x1,10$
+Snk_End 

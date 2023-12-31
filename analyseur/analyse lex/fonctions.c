@@ -93,7 +93,7 @@ bool isKeyword(const char *word ) {
     }
     return false;
 }
-bool isSymboleCle(char symbole) {
+bool isSymboleCle(char symbole,bool affiche) {
 	const char KEYSYM[6] ={
 	    '$',
 	    '[',
@@ -106,8 +106,11 @@ bool isSymboleCle(char symbole) {
     int i;
 	for (i = 0; i <= 6; i++) {
         if (symbole == KEYSYM[i]) {
-        	
         	//pour un affichage plus en detaill
+        	
+			if(affiche == false)
+        		return true;
+        	
         	printf("symbole trouver : %c ",KEYSYM[i]);
         	switch(i)
         	{
@@ -116,7 +119,7 @@ bool isSymboleCle(char symbole) {
 					break;	
 				}
         		case 1: {
-        			printf("Début de condition");
+        			printf("Debut de condition");
 					break;
 				}
         		case 2: {
@@ -129,15 +132,12 @@ bool isSymboleCle(char symbole) {
 				}
         		case 4: 
         		case 5:{
-        			printf("Opérateur de comparaison");
+        			printf("Operateur de comparaison");
 					break;
 				}
 			}
         	
         	printf("\n");
-        	
-        	
-        	
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
@@ -216,21 +216,25 @@ void analyseur_lex(FILE *file) {
 	
 	// creation dune liste de token
 	init_list(&tokenList);
-    char mot[MAX_WORD]; 
+    char mot[MAX_WORD];
     
     char c;
 	
-	
-	
+	bool endOfFile = false;
 	int i = 0;
-    while ((c = fgetc(file)) != EOF ) {
+    while ( !endOfFile ) {
+		c = fgetc(file);
+
+		if (c == EOF)
+        	endOfFile = true;
 		
+		//ingorie les comantaire
 		if(isCommentaire(c,file) )
 			while( (c = fgetc(file)) != EOF && c != '\n'  );// do nothing
 		
 		
 		
-        if (isspace(c)  || isSymboleCle(c) ) 
+        if (isspace(c)  || isSymboleCle(c,false) || c == EOF) 
 		{
 		
             if (i > 0) // Vérifier si le mot n'est pas vide
@@ -248,10 +252,12 @@ void analyseur_lex(FILE *file) {
 				
 				else
 					printf("erreur %s\n",mot);
+				if (isSymboleCle(c,true));
 			}
-			if (isSymboleCle(c));
             i = 0; // Réinitialiser l'indice du mot
         }
+        
+        //pour les Strings
         else if(c == '"'  )
 		{
 			char *s = (char*)malloc(sizeof(char)*100); //contien le string
@@ -275,14 +281,19 @@ void analyseur_lex(FILE *file) {
 		}
 		else 
            	mot[i++] = c; // Ajouter le caractère au mot 
+        
     }
     
+    
+    
+    
+    //cree le fichier token
     FILE *temp = fopen("token_table.temp", "wb");
 	if (temp != NULL) {
 	    // Write the entire array to the file
 	    fwrite(&tokenList, sizeof(list), 1, temp);
 	    fclose(temp);
-	    printf("Data written to file token_table.temp\n to use in syntaxe analyse\n");
+	    printf("\n\n\nData written to file token_table.temp\n to use in syntaxe analyse\n");
 	} else {
 	    printf("Error opening file!\n");
 	}

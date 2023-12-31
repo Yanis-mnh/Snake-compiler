@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=6 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
 [ext_resource type="Theme" uid="uid://dfns3jqit1rm4" path="res://editeur_text.tres" id="1_mcjvt"]
 [ext_resource type="Script" path="res://scean/editeur/TextEdit.gd" id="3_dib2g"]
 [ext_resource type="Script" path="res://scean/editeur/setSizeconsoleText.gd" id="4_x4inc"]
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_lnlwa"]
+number_color = Color(0.466667, 0.721569, 0.643137, 1)
+symbol_color = Color(0.298039, 0.423529, 0.501961, 1)
+member_variable_color = Color(0.180392, 0.654902, 0.505882, 1)
 
 [node name="editeur_text" type="Control"]
 layout_mode = 3
@@ -30,15 +35,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -0.104
 size_flags_horizontal = 2
+highlight_all_occurrences = true
+highlight_current_line = true
 draw_tabs = true
+syntax_highlighter = SubResource("CodeHighlighter_lnlwa")
 scroll_smooth = true
 script = ExtResource("3_dib2g")
 
 [node name="title bar" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 31.0
+anchor_bottom = 0.049
+offset_bottom = -0.752001
 grow_horizontal = 2
 theme = ExtResource("1_mcjvt")
 
@@ -46,7 +54,8 @@ theme = ExtResource("1_mcjvt")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.032
+offset_bottom = 0.00799751
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
