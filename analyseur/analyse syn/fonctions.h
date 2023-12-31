@@ -1,2 +1,4 @@
 
-void analyseur_syn(void);
+
+
+void analyseur_syn(char programme[]);

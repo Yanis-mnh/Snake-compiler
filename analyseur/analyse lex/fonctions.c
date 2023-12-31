@@ -36,7 +36,7 @@ bool isKeyword(const char *word ) {
         	token *_token = malloc(sizeof(token));
         	// i est nbr toekn type
 			_token->type = i;
-        	strcpy(_token->value , "");
+        	strcpy(_token->value , "test001");
 			add_to_liste(&tokenList,*_token,2);
             return true;
         }
@@ -58,7 +58,7 @@ bool isSymboleCle(char symbole) {
         if (symbole == KEYSYM[i]) {
 			token *_token = malloc(sizeof(token));
         	_token->type = i+9;
-        	strcpy(_token->value , "");
+        	strcpy(_token->value , "test");
 			add_to_liste(&tokenList,*_token,2);
             return true;
         }
@@ -195,7 +195,22 @@ void analyseur_lex(FILE *file) {
            	mot[i++] = c; // Ajouter le caractère au mot 
     }
     
-    
+    FILE *temp = fopen("token_table.temp", "wb");
+	if (temp != NULL) {
+	    // Write the entire array to the file
+	    fwrite(&tokenList, sizeof(list), 1, temp);
+	    fclose(temp);
+	    printf("Data written to file token_table.temp\n to use in syntaxe analyse\n");
+	} else {
+	    printf("Error opening file!\n");
+	}
+	
+
+	
+	
+	
+	
+	
     free_memory(&tokenList);
     
 }

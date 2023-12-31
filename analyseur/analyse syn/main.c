@@ -1,6 +1,13 @@
 #include<stdio.h>
 #include <stdlib.h>
 
+#include "../analyse lex/datatype.h"
+#include "../analyse lex/tokenList.h"
+#include "fonctions.h"
+
+struct list tokenList;
+
+
 /***
 /*
 /* @brief ce programme recevra le fichier cree par analysuer-lex puis vas le donner a 
@@ -10,20 +17,26 @@
 int main(int argc,char *argv[])
 {
 	
-	/*FILE *file;
-	
-	
-	file = fopen(argv[1],"r");
-	if(file == NULL)
+	FILE *token = fopen("../analyse lex/token_table.temp","rb");
+	if(token== NULL)
 	{
-		printf("ERROR D'OVERTURE DU FICHIER ");
-		exit(0);
+		perror("ERROR D\'OVERTURE DU FUCHIER");
+		exit(EXIT_FAILURE);
 	}
 	
-	*/
+	fread(&tokenList,sizeof(list),1,token);
+	affiche(tokenList);
+	
+	
 	
 	analyseur_syn("ceci est un test");
-	//fclose(file);
+	
+	
+	
+	
+	
+	//fin programme
+	fclose(token);
 	return 0;
-	return 0;
+	
 }
