@@ -1,6 +1,6 @@
 [Project]
-FileName=analysuer_lex.dev
-Name=analyseur-lex
+FileName=analyseur-syn.dev
+Name=analyseur-sem
 Type=1
 Ver=2
 ObjFiles=
@@ -19,7 +19,7 @@ ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
 OverrideOutput=0
-OverrideOutputName=
+OverrideOutputName=analyseur-syn.exe
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
@@ -27,8 +27,8 @@ CommandLine=
 Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
-CompilerSet=1
-CompilerSettings=0000000000000000001000000
+CompilerSet=0
+CompilerSettings=0000000000000000000000000
 UnitCount=6
 
 [VersionInfo]
@@ -39,14 +39,14 @@ Build=0
 LanguageID=1033
 CharsetID=1252
 CompanyName=
-FileVersion=
+FileVersion=1.0.0.0
 FileDescription=Developed using the Dev-C++ IDE
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=
+ProductVersion=1.0.0.0
 AutoIncBuildNr=0
 SyncProduct=1
 
@@ -70,7 +70,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit4]
+[Unit3]
 FileName=fonctions.h
 CompileCpp=0
 Folder=
@@ -80,8 +80,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit3]
-FileName=datatype.h
+[Unit4]
+FileName=..\analyse lex\datatype.h
 CompileCpp=0
 Folder=
 Compile=1
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=tokenList.c
+FileName=..\analyse lex\tokenList.h
 CompileCpp=0
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=tokenList.h
+FileName=..\analyse lex\tokenList.c
 CompileCpp=0
 Folder=
 Compile=1
