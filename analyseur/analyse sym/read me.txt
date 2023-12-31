@@ -1,1 +1,9 @@
 RIP BROZZA ME FINISHITO :)
+
+pour faire la connexion entre sym et syn et lex just copy
+the code of fethi rah fih kifah 
+
+
+rah kayen fichier cree par lexicale hadak fichier fih
+	les token donc read file the fonction compler
+	pour read and put them in a list struct rah f analysuer syn

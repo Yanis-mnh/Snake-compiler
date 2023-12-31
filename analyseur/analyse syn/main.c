@@ -25,11 +25,14 @@ int main(int argc,char *argv[])
 	}
 	
 	fread(&tokenList,sizeof(list),1,token);
+	
+	
+	//just pour tester la connexion entre lex et syn
 	affiche(tokenList);
 	
 	
-	
-	analyseur_syn("ceci est un test");
+	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
+	analyseur_syn(tokenList);
 	
 	
 	

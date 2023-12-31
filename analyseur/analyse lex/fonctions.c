@@ -33,18 +33,68 @@ bool isKeyword(const char *word ) {
     int i;
 	for (i = 0; i < sizeof(keywords) / sizeof(keywords[0]); ++i) {
         if (strcmp(word, keywords[i]) == 0) {
+        	//pour un affichage plus en detaill
+        	printf("mot cle trouver: %s ",keywords[i]);
+        	switch(i)
+        	{
+        		case 0: {
+					printf("pour debut du programme");
+					break;	
+				}
+        		case 1: {
+        			printf("pour declaration un entier ");
+					break;
+				}
+        		case 2: {
+        			printf("pour declaration un realle ");
+					break;
+				}
+        		case 3: {
+        			printf("pour debut un block d\'instruction ");
+					break;
+				}
+        		case 4: {
+        			printf("pour affectation d’une valeur ");
+					break;
+				}
+        		case 5:{
+        			printf("conditionnel");
+					break;
+				}
+				case 6:{
+					printf("conditionnel sino");
+					break;
+				}
+				case 7:{
+					printf("pour affectation d’une valeur");
+					break;
+				}
+				case 8:{
+					printf("pour affichage d\'une chaine de charcter");
+					break;
+				}
+				case 9:{
+					printf("pour fin du programme");
+					break;
+				}
+			}
+        	
+        	printf("\n");
+        	
+        	//creation du token
         	token *_token = malloc(sizeof(token));
         	// i est nbr toekn type
 			_token->type = i;
-        	strcpy(_token->value , "test001");
+        	strcpy(_token->value , "");
 			add_to_liste(&tokenList,*_token,2);
+			free(_token);
             return true;
         }
     }
     return false;
 }
 bool isSymboleCle(char symbole) {
-	const char KEYSYM[7] ={
+	const char KEYSYM[6] ={
 	    '$',
 	    '[',
 	    ']',
@@ -56,10 +106,45 @@ bool isSymboleCle(char symbole) {
     int i;
 	for (i = 0; i <= 6; i++) {
         if (symbole == KEYSYM[i]) {
+        	
+        	//pour un affichage plus en detaill
+        	printf("symbole trouver : %c ",KEYSYM[i]);
+        	switch(i)
+        	{
+        		case 0: {
+					printf("fin de ligne");
+					break;	
+				}
+        		case 1: {
+        			printf("Début de condition");
+					break;
+				}
+        		case 2: {
+        			printf("fin de condition");
+					break;
+				}
+        		case 3: {
+        			printf("separateur");
+					break;
+				}
+        		case 4: 
+        		case 5:{
+        			printf("Opérateur de comparaison");
+					break;
+				}
+			}
+        	
+        	printf("\n");
+        	
+        	
+        	
+        	
+        	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
         	_token->type = i+9;
         	strcpy(_token->value , "test");
 			add_to_liste(&tokenList,*_token,2);
+			free(_token);
             return true;
         }
     }
@@ -78,6 +163,7 @@ bool isInt(char *s)
     _token->type = TOKEN_INT;
     strcpy(_token->value , s);
 	add_to_liste(&tokenList,*_token,2);
+	free(_token);
 	return true;
 }
 //is real
@@ -98,6 +184,7 @@ bool isReal(char *s)
     _token->type = TOKEN_REAL;
     strcpy(_token->value , s);
 	add_to_liste(&tokenList,*_token,2);
+	free(_token);
 	return true;
 }
 
@@ -150,11 +237,7 @@ void analyseur_lex(FILE *file) {
 			{ 
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 
-                if (isKeyword(mot)) 
-                {
-                	printf("Mot-cle trouve: %s\n", mot);
-                	
-				}
+                if (isKeyword(mot));
 				else if (isInt(mot))
                 	printf("cest un nombre entier:  %s\n",mot);
                 else if (isReal(mot))
@@ -166,8 +249,7 @@ void analyseur_lex(FILE *file) {
 				else
 					printf("erreur %s\n",mot);
 			}
-			if (isSymboleCle(c) )
-				printf("cest un symbole: %c\n",c);
+			if (isSymboleCle(c));
             i = 0; // Réinitialiser l'indice du mot
         }
         else if(c == '"'  )
@@ -211,6 +293,5 @@ void analyseur_lex(FILE *file) {
 	
 	
 	
-    free_memory(&tokenList);
     
 }

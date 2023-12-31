@@ -41,7 +41,7 @@ void free_memory(list *a)
 	int i;
 	for(i=0;i<a->nbrToken;i++)
 	{
-		//free(a[i]);
+		free(a);
 	}
 }
 
