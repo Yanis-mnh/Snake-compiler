@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://drqcdubjquo1g"
-path="res://.godot/imported/MPLUSRounded1c-Light.ttf-75fcf915d4d88a7ec94be48270bdc71c.fontdata"
+uid="uid://bfvteydddtjug"
+path="res://.godot/imported/Roboto-Medium.ttf-e56fdcad96382c6d12ba4eec65e87900.fontdata"
 
 [deps]
 
-source_file="res://assets/font_M_PLUS_Rounded_1c/MPLUSRounded1c-Light.ttf"
-dest_files=["res://.godot/imported/MPLUSRounded1c-Light.ttf-75fcf915d4d88a7ec94be48270bdc71c.fontdata"]
+source_file="res://assets/font/Roboto-Medium.ttf"
+dest_files=["res://.godot/imported/Roboto-Medium.ttf-e56fdcad96382c6d12ba4eec65e87900.fontdata"]
 
 [params]
 

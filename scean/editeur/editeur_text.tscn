@@ -1,14 +1,79 @@
-[gd_scene load_steps=6 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=12 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
-[ext_resource type="Theme" uid="uid://dfns3jqit1rm4" path="res://editeur_text.tres" id="1_mcjvt"]
+[ext_resource type="FontFile" uid="uid://b3rxuuttd34fr" path="res://assets/font/MPLUSRounded1c-Medium.ttf" id="2_qkb22"]
 [ext_resource type="Script" path="res://scean/editeur/TextEdit.gd" id="3_dib2g"]
-[ext_resource type="Script" path="res://scean/editeur/setSizeconsoleText.gd" id="4_x4inc"]
+[ext_resource type="FontFile" uid="uid://bfvteydddtjug" path="res://assets/font/Roboto-Medium.ttf" id="4_r0mel"]
+[ext_resource type="PackedScene" uid="uid://cmymqbejqbmto" path="res://scean/console/console_container.tscn" id="5_d852s"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_lnlwa"]
 number_color = Color(0.466667, 0.721569, 0.643137, 1)
 symbol_color = Color(0.298039, 0.423529, 0.501961, 1)
 member_variable_color = Color(0.180392, 0.654902, 0.505882, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jkyq8"]
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grk3q"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.509804, 0.509804, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 4.0
+expand_margin_right = 10.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8glvm"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.509804, 0.509804, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 4.0
+expand_margin_right = 10.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtbda"]
+bg_color = Color(0.709804, 0.709804, 0.709804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25098, 0.25098, 0.25098, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 4.0
+expand_margin_right = 10.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_ois0b"]
+Button/colors/font_pressed_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+Button/fonts/font = ExtResource("4_r0mel")
+Button/styles/focus = SubResource("StyleBoxLine_jkyq8")
+Button/styles/hover = SubResource("StyleBoxFlat_grk3q")
+Button/styles/normal = SubResource("StyleBoxFlat_8glvm")
+Button/styles/pressed = SubResource("StyleBoxFlat_qtbda")
 
 [node name="editeur_text" type="Control"]
 layout_mode = 3
@@ -35,6 +100,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -0.104
 size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("2_qkb22")
 highlight_all_occurrences = true
 highlight_current_line = true
 draw_tabs = true
@@ -48,7 +114,6 @@ anchor_right = 1.0
 anchor_bottom = 0.049
 offset_bottom = -0.752001
 grow_horizontal = 2
-theme = ExtResource("1_mcjvt")
 
 [node name="ColorRect" type="ColorRect" parent="title bar"]
 layout_mode = 1
@@ -133,6 +198,7 @@ initial_position = 1
 title = "Open a File"
 size = Vector2i(600, 400)
 transient = false
+unresizable = true
 ok_button_text = "Ouvrir"
 cancel_button_text = "Anuller"
 file_mode = 0
@@ -143,24 +209,40 @@ filters = PackedStringArray(".snk")
 initial_position = 1
 size = Vector2i(600, 400)
 transient = false
+unresizable = true
 ok_button_text = "Enregistrer"
 cancel_button_text = "Anuller"
 access = 2
 filters = PackedStringArray("..snk")
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Warning!!"
+size = Vector2i(290, 99)
+unresizable = true
+popup_window = true
+min_size = Vector2i(250, 70)
+theme = SubResource("Theme_ois0b")
+ok_button_text = "Yes"
+dialog_text = "Do u want to close the file 
+without  saving"
+dialog_autowrap = true
+cancel_button_text = "No"
+
 [node name="Console" type="Window" parent="."]
-initial_position = 2
 title = "Console"
 size = Vector2i(500, 500)
 visible = false
+unresizable = true
+always_on_top = true
 min_size = Vector2i(250, 250)
 
-[node name="consoleText" type="RichTextLabel" parent="Console"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("4_x4inc")
+[node name="Control" parent="Console" instance=ExtResource("5_d852s")]
 
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="file_selected" from="OpenFileWindow" to="." method="_on_open_file_window_file_selected"]
 [connection signal="file_selected" from="SaveFileWindow" to="." method="_on_save_file_window_file_selected"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="about_to_popup" from="Console" to="Console/Control" method="_on_console_about_to_popup"]
 [connection signal="close_requested" from="Console" to="." method="_on_console_close_requested"]
+[connection signal="window_input" from="Console" to="." method="_on_console_window_input"]

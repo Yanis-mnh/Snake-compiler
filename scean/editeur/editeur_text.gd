@@ -18,20 +18,30 @@ enum analysuer{
 @onready var save_file_window = $SaveFileWindow
 @onready var menu_button_analyse = $"title bar/MenuBar/HBoxContainer/MenuButtonAnalyse"
 @onready var text_edit = $TextEdit
-@onready var console_text = $Console/consoleText
 @onready var title = $"title bar/title"
 @onready var console = $Console
+@onready var console_text = $Console/Control._get_console_text()
+@onready var confirmation_dialog = $ConfirmationDialog
+
 
 
 var app_name = "snake"
 var current_file = "Untitled"
 
 
-
 func _ready():
+	get_tree().set_auto_accept_quit(false)
 	update_window_name()
 	dropMenuFile.get_popup().connect("id_pressed",on_item_pressed)
 	menu_button_analyse.get_popup().connect("id_pressed",on_analyse)
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_exit_game()
+
+
+
 
 func update_window_name():
 	DisplayServer.window_set_title(app_name +" _ "+ current_file)
@@ -39,6 +49,7 @@ func update_window_name():
 
 #les option de l'analyseur 
 func on_analyse(id):
+	console.hide()
 	save_file()
 	if(current_file == "Untitled"):
 		return
@@ -50,20 +61,20 @@ func on_analyse(id):
 			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
 			var result:String = array_to_string(out_put)
 			console_text.text = result
-			print(result)
 			OS.kill(pid);
-			console.popup_centered()
+			console.popup()
 		analysuer.anal_syn:
 			var result:String = "work in progress return later"
 			console_text.text = result
-			console.popup_centered()
+			console.popup()
 		analysuer.anal_sem:
 			var result:String = "work in progress return later"
 			console_text.text = result
-			console.popup_centered()
+			console.popup()
 
 #function de getion des button fichier
 func on_item_pressed(id):
+	console.hide()
 	var item_id = dropMenuFile.get_popup().get_item_id(id)
 	match item_id:
 		file_option.new_file:
@@ -76,7 +87,7 @@ func on_item_pressed(id):
 		file_option.save_as_file:
 			save_file_window.popup_centered()
 		file_option.quit:
-			get_tree().quit()
+			_exit_game()
 
 
 func _on_open_file_window_file_selected(path):
@@ -121,3 +132,29 @@ func array_to_string(arr: Array) -> String:
 
 func _on_console_close_requested():
 	console.hide()
+
+#short-cut like
+func _on_console_window_input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			console.hide()
+
+#exit logique
+func _on_confirmation_dialog_confirmed():
+	get_tree().queue_delete(self)
+	get_tree().quit()
+
+func _exit_game():
+	if app_name == "(*) snake":
+		confirmation_dialog.popup_centered()
+	else:
+		get_tree().queue_delete(self)
+		get_tree().quit()
+
+
+
+
+
+func _on_confirmation_dialog_canceled():
+	$ConfirmationDialog.hide()
+
