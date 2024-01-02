@@ -1,5 +1,5 @@
 Snk_Begin
-	Snk_Int i, j, x1, x2 $
+	Snk_Int i, j, x1, x2,somme $
 	Snk_Real x3 $
 	Set i 33 $
 	If [ i<50]
@@ -14,8 +14,9 @@ Snk_Begin
 	Snk_Print i,j $
 	While[i<50]
 	Begin
-		$$the result of i+1 will be stored in i
-		Add i,1$
+		$$the result of i+1 will be stored in somme
+		$$la meme chose pour les autre operateur
+		Add somme,i,1$
 		Snk_Print i$
 	End
 $$ ceci est un commentaire

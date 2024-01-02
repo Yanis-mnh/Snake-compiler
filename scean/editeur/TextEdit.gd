@@ -4,8 +4,7 @@ extends TextEdit
 
 
 func _ready():
-	self.custom_minimum_size.x = DisplayServer.window_get_size().x*0.75;
-	self.custom_minimum_size.y = DisplayServer.window_get_size().y;
+	
 	
 	#set the color theme for the text editor (text)
 	var highlighter := CodeHighlighter.new()

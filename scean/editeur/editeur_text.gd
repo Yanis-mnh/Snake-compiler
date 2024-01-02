@@ -30,6 +30,7 @@ var current_file = "Untitled"
 
 
 func _ready():
+	DisplayServer.window_set_min_size(Vector2i(791, 641),0)
 	get_tree().set_auto_accept_quit(false)
 	update_window_name()
 	dropMenuFile.get_popup().connect("id_pressed",on_item_pressed)
@@ -59,6 +60,7 @@ func on_analyse(id):
 			var arg = [current_file]
 			var out_put=[]
 			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
+			print(pid)
 			var result:String = array_to_string(out_put)
 			console_text.text = result
 			OS.kill(pid);
@@ -66,7 +68,7 @@ func on_analyse(id):
 		analysuer.anal_syn:
 			var result:String = "work in progress return later"
 			console_text.text = result
-			console.popup()
+			console.popup_on_parent()
 		analysuer.anal_sem:
 			var result:String = "work in progress return later"
 			console_text.text = result

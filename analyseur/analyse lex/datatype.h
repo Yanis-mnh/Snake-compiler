@@ -39,7 +39,7 @@ typedef enum {
 
 
 
-//strcuteur d'un id
+//strcuteur d'un token
 typedef struct{
 	tokenType type;
 	char value[50];
