@@ -239,6 +239,7 @@ bool isValideId(char *s,int line)
 	return true;
 }
 
+// un comentaire sur une seule ligne
 bool isCommentaire(char c, FILE *f) {
     
 
@@ -254,6 +255,8 @@ bool isCommentaire(char c, FILE *f) {
     }
     return false;
 }
+
+
 
 // Fonction principale pour l'analyse lexicale
 void analyseur_lex(FILE *file) {
@@ -274,12 +277,31 @@ void analyseur_lex(FILE *file) {
         	endOfFile = true;
 		
 	
-		
 		//ingorie les comantaire
+		//comentaire sur une ligne
 		if(isCommentaire(c,file) )
 			while( (c = fgetc(file)) != EOF && c != '\n'  );// do nothing
 		
-		
+		//un comentaire sur +ieur ligne de code
+		if(c == '#' )
+		{
+			
+			while( (c = fgetc(file)) != EOF )
+			{
+				if (c == '#') 
+			    	break;
+			    if(c == '\n')
+			    	line++;
+			}
+			if(c == EOF)
+			{
+				printf("Erreur : fermeture de commentaire manquante (#).");
+				exit(EXIT_FAILURE);
+			}
+			if(c == '#')
+				c = fgetc(file);
+		}
+			
 		
         if (isspace(c)  || isSymboleCle(c,false,line) || c == EOF) 
 		{
@@ -370,3 +392,4 @@ void analyseur_lex(FILE *file) {
 	
 	free_memory(&tokenList);
 }
+

@@ -14,8 +14,10 @@ Snk_Begin
 	Snk_Print i,j $
 	While[i<50]
 	Begin
-		$$the result of i+1 will be stored in somme
-		$$la meme chose pour les autre operateur
+		$$comantaire sur +ieur ligne est # bla bla #
+		#the result of i+1 will be stored in somme
+		la meme chose pour les autre operateur #
+
 		Add somme,i,1$
 		Snk_Print i$
 	End
