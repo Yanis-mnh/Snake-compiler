@@ -6,7 +6,7 @@
 
 void init_list(list *a)
 {
-	a->line=0;
+	
 	a->nbrToken = 0;
 	
 }
@@ -19,10 +19,10 @@ void add_to_liste(list *a,token _token,int line)
 		free_memory(a);
 		exit(EXIT_FAILURE);
 	}
-	
 	a->_token[a->nbrToken] = _token;	
+	a->line[a->nbrToken] = line;
 	a->nbrToken++;
-	a->line = line;
+	
 	
 }
 
@@ -31,8 +31,11 @@ void affiche(list a)
 	int i=0;
 	for(;i<a.nbrToken;i++)
 	{
-		printf("Token: %d\n",a._token[i].type);
-		printf("value: %s\n",a._token[i].value);
+		//printf("Token: %d\n",a._token[i].type);
+		printf("________________\n");
+		printf("token: %d\n",a._token[i].type);
+		printf("line: %d\n",a.line[i]);
+		
 	}
 }
 

@@ -4,13 +4,13 @@
 
 
 #define maxToken 500
-
+#define maxeLine 9999
 
 
 typedef struct list{
 	token _token[maxToken];
 	int nbrToken;
-	int line;
+	int line[maxeLine];
 }list;
 
 

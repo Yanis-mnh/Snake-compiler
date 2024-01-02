@@ -172,7 +172,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
-        	_token->type = i+16;
+        	_token->type = i+15;
         	strcpy(_token->value , "");
 			add_to_liste(&tokenList,*_token,line);
 			free(_token);
@@ -234,7 +234,7 @@ bool isValideId(char *s,int line)
 	token *_token = malloc(sizeof(token));
     _token->type = TOKEN_IDENTIFIER;
     strcpy(_token->value , s);
-	add_to_liste(&tokenList,*_token,2);
+	add_to_liste(&tokenList,*_token,line);
 	free(_token);
 	return true;
 }
@@ -361,8 +361,6 @@ void analyseur_lex(FILE *file) {
            	
            	
            	
-           	
-           	
         if(c == '\n') //pour avoire le compt des ligne
         {
         	line++;
@@ -392,4 +390,26 @@ void analyseur_lex(FILE *file) {
 	
 	free_memory(&tokenList);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

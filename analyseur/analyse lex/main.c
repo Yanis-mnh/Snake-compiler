@@ -4,7 +4,6 @@
 
 #include "fonctions.h"
 
-
 /**
 *
 * @param argv[] is a vecteur of string that we will pass the path of the file to analyse
@@ -20,7 +19,7 @@ int main(int argc, char *argv[]) {
 		
 	
 	//juste for testing this line should be changed later
-	//argv[1] = "test001.snk";
+	argv[1] = "test001.snk";
 	FILE *file = fopen(argv[1],"r");
 	
 	
