@@ -24,9 +24,9 @@ enum analysuer{
 @onready var confirmation_dialog = $ConfirmationDialog
 
 
-
-var app_name = "snake"
-var current_file = "Untitled"
+var oldText:String = ""
+var app_name:String = "snake"
+var current_file:String = "Untitled"
 
 
 func _ready():
@@ -37,6 +37,7 @@ func _ready():
 	menu_button_analyse.get_popup().connect("id_pressed",on_analyse)
 
 
+#to show the confirmation message when tryin to exite the app
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		_exit_game()
@@ -68,7 +69,7 @@ func on_analyse(id):
 		analysuer.anal_syn:
 			var result:String = "work in progress return later"
 			console_text.text = result
-			console.popup_on_parent()
+			console.popup()
 		analysuer.anal_sem:
 			var result:String = "work in progress return later"
 			console_text.text = result
@@ -80,8 +81,10 @@ func on_item_pressed(id):
 	var item_id = dropMenuFile.get_popup().get_item_id(id)
 	match item_id:
 		file_option.new_file:
+			oldText = ""
 			current_file = "Untitled"
 			text_edit.text = "";
+			app_name = "snake"
 		file_option.load_file:
 			open_file_window.popup_centered()
 		file_option.save_file:
@@ -94,7 +97,8 @@ func on_item_pressed(id):
 
 func _on_open_file_window_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
-	text_edit.text = file.get_as_text();
+	text_edit.text = file.get_as_text()
+	oldText = text_edit.text
 	file.close()
 	current_file = path
 	update_window_name()
@@ -120,6 +124,11 @@ func save_file():
 
 
 func _on_text_edit_text_changed():
+	
+	if text_edit.text ==  oldText:
+		app_name = "snake"
+		update_window_name()
+		return
 	app_name = "(*) snake"
 	update_window_name()
 

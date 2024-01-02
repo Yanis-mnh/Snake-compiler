@@ -113,6 +113,7 @@ highlight_current_line = true
 draw_tabs = true
 syntax_highlighter = SubResource("CodeHighlighter_lnlwa")
 scroll_smooth = true
+scroll_v_scroll_speed = 70.0
 caret_blink = true
 script = ExtResource("3_dib2g")
 
