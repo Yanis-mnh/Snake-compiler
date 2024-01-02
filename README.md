@@ -1,6 +1,6 @@
 # Snake Compiler
 
-Le compilateur Snake est un projet visant à réaliser l'analyseur lexical, syntaxique et sémantique d'un langage proche du C, ainsi qu'une interface graphique pour faciliter la compilation du langage.
+Le compilateur Snake est un projet visant à réaliser l'analyseur lexical, syntaxique et sémantique d'un langage d'un langage fictif, ainsi qu'une interface graphique pour faciliter la compilation du langage.
 
 ## Fonctionnalités
 
@@ -53,9 +53,6 @@ L'interface utilisateur est réalisée en utilisant Godot 4 pour fournir une exp
 2. Ouvrir le projet dans Godot 4.
 3. Utiliser l'interface graphique pour charger et compiler les fichiers écrits en Snake.
 
-## Contribution
-
-Les contributions sont les bienvenues! Si vous souhaitez contribuer, veuillez ouvrir une issue pour discuter des changements que vous souhaitez apporter.
 
 ## Licence
 
