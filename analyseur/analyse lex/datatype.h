@@ -38,7 +38,6 @@ typedef enum {
 
 
 
-
 //strcuteur d'un token
 typedef struct{
 	tokenType type;

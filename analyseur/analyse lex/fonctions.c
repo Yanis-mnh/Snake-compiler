@@ -172,7 +172,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
-        	_token->type = i+15;
+        	_token->type = i+16;
         	strcpy(_token->value , "");
 			add_to_liste(&tokenList,*_token,line);
 			free(_token);
@@ -390,6 +390,8 @@ void analyseur_lex(FILE *file) {
 	
 	free_memory(&tokenList);
 }
+
+
 
 
 
