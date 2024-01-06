@@ -25,8 +25,10 @@ func _ready():
 	for kw in KEYWORD:
 		highlighter.add_keyword_color(kw, Color("#92C7CF"))
 	
-		
+	#the comments color one line and muliti-line
 	highlighter.add_color_region("$$","",Color("#6e6e6e"),true);
+	highlighter.add_color_region("#","#",Color("#6e6e6e"),false);
+	#color for String type character
 	highlighter.add_color_region("\"","\"",Color("#ffe085"),false);
 	syntax_highlighter = highlighter
 

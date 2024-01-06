@@ -2,7 +2,7 @@ Snk_Begin
 	Snk_Int i, j, x1, x2,somme $
 	Snk_Real x3 $
 	Set i 33 $
-	If [ i<50]
+	If [i<50]
 		Set x1 10 $
 	Else
 	Begin

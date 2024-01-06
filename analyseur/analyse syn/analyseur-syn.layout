@@ -2,14 +2,20 @@
 Order=0,1,2,3,4
 Focused=1
 [Editor_0]
-CursorCol=12
-CursorRow=8
-TopLine=1
+CursorCol=2
+CursorRow=32
+TopLine=13
 LeftChar=1
 [Editor_1]
+<<<<<<< HEAD
 CursorCol=3
 CursorRow=52
 TopLine=25
+=======
+CursorCol=7
+CursorRow=61
+TopLine=30
+>>>>>>> 6fbda3c5058ff069a50add0226440174b011e75d
 LeftChar=1
 [Editor_2]
 CursorCol=1
@@ -22,7 +28,7 @@ CursorRow=13
 TopLine=1
 LeftChar=1
 [Editor_4]
-CursorCol=11
-CursorRow=13
+CursorCol=1
+CursorRow=10
 TopLine=1
 LeftChar=1

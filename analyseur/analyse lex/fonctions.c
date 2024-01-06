@@ -16,7 +16,7 @@ struct list tokenList;
 bool isKeyword(const char *word ,int line) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
-	const char *keywords[16] ={
+	const char *keywords[17] ={
 	    "Snk_Begin",
 	    "Snk_Int",	
 	    "Snk_Real",
@@ -32,7 +32,8 @@ bool isKeyword(const char *word ,int line) {
 		"Add",
 	    "Sub",
 	    "Mul",
-	    "Div"
+	    "Div",
+	    "from"
 	};
 
     // Vérification si le mot est un mot-clé
@@ -107,6 +108,10 @@ bool isKeyword(const char *word ,int line) {
 					printf("pour division");
 					break;
 				}
+				case 16:{
+					printf("pour affectation");
+					break;
+				}
 					
 			}
         	
@@ -147,7 +152,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
         	{
         		case 0: {
 					printf("fin de ligne");
-					break;	
+					break;
 				}
         		case 1: {
         			printf("Debut de condition");
@@ -172,7 +177,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
-        	_token->type = i+15;
+        	_token->type = i+17;
         	strcpy(_token->value , "");
 			add_to_liste(&tokenList,*_token,line);
 			free(_token);
@@ -229,8 +234,14 @@ bool isValideId(char *s,int line)
 	
 	for(;i<strlen(s);i++)
 	{
-		if( !isalnum(s[0]) && s[0] != '_'  )
+		if(i>31)
+		{
+			printf("Erreur: (Taille de l'id ne peut pas depasser 31 char)\n");
+			exit(1);
+		}
+		if(!isalnum(s[0]) && s[0] != '_')
 			return false;
+		
 	}
 	token *_token = malloc(sizeof(token));
     _token->type = TOKEN_IDENTIFIER;
@@ -296,7 +307,7 @@ void analyseur_lex(FILE *file) {
 			}
 			if(c == EOF)
 			{
-				printf("Erreur : fermeture de commentaire manquante (#).");
+				printf("Erreur: (Fermeture de commentaire manquante (#)).");
 				exit(EXIT_FAILURE);
 			}
 			if(c == '#')
@@ -312,16 +323,16 @@ void analyseur_lex(FILE *file) {
                 mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
                 
                 if (isKeyword(mot,line));
+                
 				else if (isInt(mot,line))
                 	printf("cest un nombre entier:  %s\n",mot);
                 else if (isReal(mot,line))
                 	printf("cest un nombre real:  %s\n",mot);
                 else if(isValideId(mot,line))
 					printf("identificateur : %s\n",mot);
-				//fix this shit later
 				
 				else
-					printf("erreur %s dans la ligne: %d\n",mot,line);
+					printf("Erreur: ( %s dans la ligne: %d)\n",mot,line);
 			}
 			if (isSymboleCle(c,true,line));
             i = 0; // Réinitialiser l'indice du mot
@@ -330,11 +341,21 @@ void analyseur_lex(FILE *file) {
         //pour les Strings
         else if(c == '"'  )
 		{
-			char *s = (char*)malloc(sizeof(char)*200); //contien le string
+			char *s = (char*)malloc(sizeof(char)*201); //contien le string
 			int j = 0;
 			while( (c = fgetc(file)) != EOF && c != '"')
 			{
-				if (c == '\"' || j>100)
+				//automate String
+				if (c == '\"' || j>200)
+					break;
+				while(c == '\n')
+				{
+					c = fgetc(file);
+					line++;
+					if( c == EOF || c == '"')
+						break;
+				}
+				if(c == EOF || c == '\"' || j>100)
 					break;
 				s[j] = c;
 				j++;
@@ -351,7 +372,7 @@ void analyseur_lex(FILE *file) {
 			}
 			else
 			{	
-				printf("Guillemet (\") manquant ou taille de la chaine trop elevee dans la ligne  %d\n",line);
+				printf("Erreur: (Guillemet (\") manquant ou taille Strin > 100 chars ligne: %d)\n",line);
 				free(s);
 				exit(EXIT_FAILURE);
 			}
@@ -395,7 +416,14 @@ void analyseur_lex(FILE *file) {
 
 
 
-
+/*
+void test()
+{
+	int i=0;
+	for(;i<tokenList.nbrToken;i++)
+		printf("line: %d",tokenList.line[i]);
+}
+*/
 
 
 

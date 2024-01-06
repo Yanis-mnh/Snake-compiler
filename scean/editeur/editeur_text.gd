@@ -53,8 +53,10 @@ func update_window_name():
 func on_analyse(id):
 	console.hide()
 	save_file()
+
 	if(current_file == "Untitled"):
 		return
+
 	match id:
 		analysuer.anal_lex:
 			var exePath = "analyseur/analyse lex/analysuer_lex.exe"
@@ -101,14 +103,16 @@ func _on_open_file_window_file_selected(path):
 	oldText = text_edit.text
 	file.close()
 	current_file = path
+	app_name = "snake"
 	update_window_name()
 
 
 func _on_save_file_window_file_selected(path):
+	current_file = path
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(text_edit.text)
 	file.close()
-	current_file = path
+	app_name = "snake"
 	update_window_name()
 
 func save_file():
@@ -131,7 +135,6 @@ func _on_text_edit_text_changed():
 		return
 	app_name = "(*) snake"
 	update_window_name()
-
 
 
 func array_to_string(arr: Array) -> String:
@@ -161,9 +164,6 @@ func _exit_game():
 	else:
 		get_tree().queue_delete(self)
 		get_tree().quit()
-
-
-
 
 
 func _on_confirmation_dialog_canceled():
