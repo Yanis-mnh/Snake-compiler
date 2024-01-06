@@ -11,6 +11,7 @@ typedef struct list{
 	token _token[maxToken];
 	int nbrToken;
 	int line[maxeLine];
+	
 }list;
 
 

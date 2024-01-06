@@ -12,9 +12,9 @@
 
 struct list tokenList;
 
-// Fonction pour vérifier si un mot est un mot-clé
+// Fonction pour vÃ©rifier si un mot est un mot-clÃ©
 bool isKeyword(const char *word ,int line) {
-    // Liste de mots-clés
+    // Liste de mots-clÃ©s
     //keywords (la liste) est dans "datatype.h"
 	const char *keywords[17] ={
 	    "Snk_Begin",
@@ -36,7 +36,7 @@ bool isKeyword(const char *word ,int line) {
 	    "from"
 	};
 
-    // Vérification si le mot est un mot-clé
+    // VÃ©rification si le mot est un mot-clÃ©
     int i;
 	for (i = 0; i < sizeof(keywords) / sizeof(keywords[0]); ++i) {
         if (strcmp(word, keywords[i]) == 0) {
@@ -61,7 +61,7 @@ bool isKeyword(const char *word ,int line) {
 					break;
 				}
         		case 4: {
-        			printf("pour affectation d’une valeur ");
+        			printf("pour affectation dâ€™une valeur ");
 					break;
 				}
         		case 5:{
@@ -73,7 +73,7 @@ bool isKeyword(const char *word ,int line) {
 					break;
 				}
 				case 7:{
-					printf("pour affectation d’une valeur");
+					printf("pour affectation dâ€™une valeur");
 					break;
 				}
 				case 8:{
@@ -138,7 +138,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
 	    '>',
 	    '<'
 	};
-    // Vérification si le mot est un mot-clé
+    // VÃ©rification si le mot est un mot-clÃ©
     int i;
 	for (i = 0; i <= 6; i++) {
         if (symbole == KEYSYM[i]) {
@@ -197,6 +197,7 @@ bool isInt(char *s,int line)
 	}
 	token *_token = malloc(sizeof(token));
     _token->type = TOKEN_INT;
+
     strcpy(_token->value , s);
 	add_to_liste(&tokenList,*_token,line);
 	free(_token);
@@ -317,9 +318,9 @@ void analyseur_lex(FILE *file) {
         if (isspace(c)  || isSymboleCle(c,false,line) || c == EOF) 
 		{
 		
-            if (i > 0) // Vérifier si le mot n'est pas vide
+            if (i > 0) // VÃ©rifier si le mot n'est pas vide
 			{ 
-                mot[i] = '\0'; // Ajouter le caractère de fin de chaîne
+                mot[i] = '\0'; // Ajouter le caractÃ¨re de fin de chaÃ®ne
                 
                 if (isKeyword(mot,line));
                 
@@ -334,7 +335,7 @@ void analyseur_lex(FILE *file) {
 					printf("Erreur: ( %s dans la ligne: %d)\n",mot,line);
 			}
 			if (isSymboleCle(c,true,line));
-            i = 0; // Réinitialiser l'indice du mot
+            i = 0; // RÃ©initialiser l'indice du mot
         }
         
         //pour les Strings
@@ -378,7 +379,7 @@ void analyseur_lex(FILE *file) {
 			free(s);
 		}
 		else 
-           	mot[i++] = c; // Ajouter le caractère au mot 
+           	mot[i++] = c; // Ajouter le caractÃ¨re au mot 
            	
            	
            	

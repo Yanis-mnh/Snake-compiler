@@ -1,9 +1,17 @@
 Snk_Begin
+<<<<<<< HEAD
+	Snk_Int i, j, x1, x2, x5,somme $
+=======
 	Snk_Int _i, j, x1, x2,somme $
+>>>>>>> 6fbda3c5058ff069a50add0226440174b011e75d
 	Snk_Real x3 $
 	Set i 33 $
 	If [ i<50]
+	Begin
 		Set x1 10 $
+		Set x3 12.75 $
+		Set x5 7.12 $
+	End
 	Else
 	Begin
 		Get x2 from x3 $

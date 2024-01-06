@@ -43,6 +43,12 @@ typedef enum {
 typedef struct{
 	tokenType type;
 	char value[50];
+
 }token;
+typedef struct {
+        char name[30];
+        char value[50];
+        tokenType type;
+}id;
 
 #endif
