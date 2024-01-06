@@ -21,17 +21,18 @@ typedef enum {
 	TOKEN_SUB, //13
 	TOKEN_MUL, //14
 	TOKEN_DIV, //15
-    //symbole token start form 16 to 21
-	TOKEN_FIN_LIGNE, //16
-	TOKEN_OPEN_BRACKET, //17
-	TOKEN_CLOSE_BRACKET, //18
-	TOKEN_COMMA, //19
-	TOKEN_GRREATER, //20
-	TOKEN_INFERIOR, //21
+	TOKEN_FROM, //16
+    //symbole token start form 17 to 21
+	TOKEN_FIN_LIGNE, //17
+	TOKEN_OPEN_BRACKET, //18
+	TOKEN_CLOSE_BRACKET, //19
+	TOKEN_COMMA, //20
+	TOKEN_GRREATER, //21
+	TOKEN_INFERIOR, //22
 	//token for other start from 21 to 23
-	TOKEN_IDENTIFIER, //22
-	TOKEN_INT, //23
-    TOKEN_REAL //24
+	TOKEN_IDENTIFIER, //23
+	TOKEN_INT, //24
+    TOKEN_REAL //25
     
 }tokenType;
 

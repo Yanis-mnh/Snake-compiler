@@ -16,7 +16,7 @@ struct list tokenList;
 bool isKeyword(const char *word ,int line) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
-	const char *keywords[16] ={
+	const char *keywords[17] ={
 	    "Snk_Begin",
 	    "Snk_Int",	
 	    "Snk_Real",
@@ -32,7 +32,8 @@ bool isKeyword(const char *word ,int line) {
 		"Add",
 	    "Sub",
 	    "Mul",
-	    "Div"
+	    "Div",
+	    "from"
 	};
 
     // Vérification si le mot est un mot-clé
@@ -107,6 +108,10 @@ bool isKeyword(const char *word ,int line) {
 					printf("pour division");
 					break;
 				}
+				case 16:{
+					printf("pour affectation");
+					break;
+				}
 					
 			}
         	
@@ -172,7 +177,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
         	
         	//ajouter le token a la liste
 			token *_token = malloc(sizeof(token));
-        	_token->type = i+16;
+        	_token->type = i+17;
         	strcpy(_token->value , "");
 			add_to_liste(&tokenList,*_token,line);
 			free(_token);
