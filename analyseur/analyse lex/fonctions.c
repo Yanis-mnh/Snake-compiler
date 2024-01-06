@@ -415,14 +415,15 @@ void analyseur_lex(FILE *file) {
 
 
 
-/*
-void test()
+
+/*void test()
 {
 	int i=0;
 	for(;i<tokenList.nbrToken;i++)
-		printf("line: %d",tokenList.line[i]);
-}
-*/
+		if(tokenList._token[i].type == tokenType.TOKEN_IDENTIFIER)
+		printf("id: ",tokenList._token[i].value);
+}*/
+
 
 
 
