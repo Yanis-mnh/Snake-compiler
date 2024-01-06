@@ -30,7 +30,6 @@ int main(int argc,char *argv[])
 	//just pour tester la connexion entre lex et syn
 	//affiche(tokenList);
 	
-	
 	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
 	analyseur_syn(tokenList);
 	

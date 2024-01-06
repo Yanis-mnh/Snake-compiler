@@ -43,17 +43,15 @@ typedef enum {
 */
 
 
-void analyseur_syn(list token)
+void analyseur_syn(list tokenList)
 {
 	//example de letulisation des token
 	//pour snk begin cest TOKEN_SNK_BEGIN donc
 	int i =0;
-	for(;i<token.nbrToken;i++)
+	for(;i<tokenList.nbrToken;i++)
 	{
-		if(token._token[i].type == TOKEN_SNK_BEGIN)
-		{
-			printf("SNK_BEGIN");
-		}
+		if(tokenList._token[i].type == TOKEN_INT)
+			printf("line: %d\n",(int) "4");
 	}
 	//donc tas une liste de tokens
 	//bone chance u will nead it :)

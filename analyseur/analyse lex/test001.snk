@@ -1,5 +1,5 @@
 Snk_Begin
-	Snk_Int i, j, x1, x2,somme $
+	Snk_Int _i, j, x1, x2,somme $
 	Snk_Real x3 $
 	Set i 33 $
 	If [ i<50]
@@ -10,7 +10,8 @@ Snk_Begin
 		Set k 43.5 $
 		Snk_Print x2, x3 $
  	End
-	Snk_Print " Hello :)"  $
+	$$the String have a new update it can be used in multi-line :)
+	Snk_Print "Hello :)"  $
 	Snk_Print i,j $
 	While[i<50]
 	Begin
