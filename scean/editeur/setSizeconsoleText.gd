@@ -7,11 +7,11 @@ func _ready():
 	#size
 	self.custom_minimum_size = get_parent().size
 	#position
-	get_parent().size.x = 400
+	get_parent().size.x = 450
 	
 
 func _process(_delta):
-	if(oldPosition != DisplayServer.window_get_position(0)):
+	if(oldPosition != DisplayServer.window_get_position(0)  ):
 		get_parent().position.x = DisplayServer.window_get_position(0).x + DisplayServer.window_get_size(0).x - get_parent().size.x
 		get_parent().position.y = DisplayServer.window_get_position(0).y +30
 		get_parent().size.y = DisplayServer.window_get_size(0).y -30

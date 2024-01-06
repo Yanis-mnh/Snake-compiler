@@ -137,7 +137,6 @@ func _on_text_edit_text_changed():
 	update_window_name()
 
 
-
 func array_to_string(arr: Array) -> String:
 	var s = ""
 	for i in arr:
@@ -165,9 +164,6 @@ func _exit_game():
 	else:
 		get_tree().queue_delete(self)
 		get_tree().quit()
-
-
-
 
 
 func _on_confirmation_dialog_canceled():
