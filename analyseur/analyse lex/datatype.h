@@ -47,7 +47,7 @@ typedef struct{
 }token;
 typedef struct {
         char name[30];
-        char value[50];
+        char value[50]; 
         tokenType type;
 }id;
 

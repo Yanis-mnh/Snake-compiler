@@ -1,10 +1,6 @@
 Snk_Begin
-<<<<<<< HEAD
 	Snk_Int i, j, x1, x2, x5,somme $
-=======
-	Snk_Int _i, j, x1, x2,somme $
->>>>>>> 6fbda3c5058ff069a50add0226440174b011e75d
-	Snk_Real x3 $
+	Snk_Real x3, res $
 	Set i 33 $
 	If [ i<50]
 	Begin
@@ -20,13 +16,15 @@ Snk_Begin
  	End
 	$$the String have a new update it can be used in multi-line :)
 	Snk_Print "Hello :)"  $
+	Div
 	Snk_Print i,j $
 	While[i<50]
 	Begin
 		$$comantaire sur +ieur ligne est # bla bla #
 		#multi-line comments
 		like this #
-
+		Div somme,i,10$ 
+		Div res,i,0$
 		Add somme,i,1$
 		Snk_Print i$
 	End
