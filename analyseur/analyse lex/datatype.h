@@ -32,7 +32,7 @@ typedef enum {
 	//token for other start from 21 to 23
 	TOKEN_IDENTIFIER, //23
 	TOKEN_INT, //24
-    TOKEN_REAL //25
+    TOKEN_REAL, //25
     TOKEN_STRING //26
     
 }tokenType;

@@ -364,7 +364,7 @@ void analyseur_lex(FILE *file) {
 			if(c == '"')
 			{
 				token *_token = malloc(sizeof(token));
-			    _token->type = TOKEN_IDENTIFIER;
+			    _token->type = TOKEN_STRING;
 			    strcpy(_token->value , s);
 				add_to_liste(&tokenList,*_token,line);
 				free(_token);
