@@ -1,5 +1,5 @@
 [Project]
-FileName=analyseur-syn.dev
+FileName=analyseur-sem.dev
 Name=analyseur-sem
 Type=1
 Ver=2
@@ -27,8 +27,8 @@ CommandLine=
 Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
-CompilerSet=0
-CompilerSettings=0000000000000000000000000
+CompilerSet=1
+CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0
 UnitCount=6
 
 [VersionInfo]
