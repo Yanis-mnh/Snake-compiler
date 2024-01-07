@@ -1,9 +1,11 @@
 Snk_Begin
 	Snk_Int _i, j, x1, x2,somme $
 	Snk_Real x3 $
-	Set i 33 $
-	If [ i<50]
+	Set _i 33 $
+	If [ _i<50]
+	Begin
 		Set x1 10 $
+	End
 	Else
 	Begin
 		Get x2 from x3 $
@@ -13,17 +15,17 @@ Snk_Begin
 	$$the String have a new update it can be used in multi-line :)
 	Snk_Print "Hello :)"  $
 	Snk_Print i,j $
-	While[i<50]
+	While[_i<50]
 	Begin
 		$$comantaire sur +ieur ligne est # bla bla #
 		#multi-line comments
 		like this #
 
-		Add somme,i,1$
-		Div somme,i,10$
-		Mul somme,i,10$
-		Sub somme,i,10$
-		Snk_Print i$
+		Add somme,_i, 1$
+		Div somme,_i, 10$
+		Mul somme,_i, 10$
+		Sub somme,_i, 10$
+		Snk_Print _i$
 	End
 $$ ceci est un commentaire sur une ligne
 Snk_End

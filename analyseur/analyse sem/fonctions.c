@@ -45,27 +45,28 @@ typedef enum {
 
 */
 //function principle
+
 void analyseur_sem(list token)
 {
 	//example de letulisation des token
 	//pour snk begin cest TOKEN_SNK_BEGIN donc
-	int i =0,j=0,cerruer=0;
+	int i =0,j=0,k=0,cerruer=0;
 	id id[30];
 	for(;i<token.nbrToken;i++)
 	{
 		if(token._token[i].type == TOKEN_DEC_INT)
 		{
-			
+			k=0;
 			while(token._token[i].type!=TOKEN_FIN_LIGNE)
 			{
+				
 				i++;
 				if(token._token[i].type==TOKEN_IDENTIFIER)
 				{
-					
 					strcpy(id[j].name,token._token[i].value);
-					strcpy(id[j].value,"init");
-					id[j].type= TOKEN_DEC_INT;
-					j++;
+							strcpy(id[j].value,"init");
+							id[j].type= TOKEN_DEC_INT;
+							j++;	
 				}
 					
 			}
@@ -73,16 +74,17 @@ void analyseur_sem(list token)
 		}
 		if(token._token[i].type == TOKEN_DEC_REAL)
 		{
-			
+			k=0;
 			while(token._token[i].type!=TOKEN_FIN_LIGNE)
 			{
 				i++;
 				if(token._token[i].type==TOKEN_IDENTIFIER)
 				{
 					strcpy(id[j].name,token._token[i].value);
-					strcpy(id[j].value,"init");
-					id[j].type= TOKEN_DEC_REAL;
-					j++;
+							strcpy(id[j].value,"init");
+							id[j].type= TOKEN_DEC_REAL;
+							j++;
+					
 				}
 					
 			}
@@ -92,26 +94,34 @@ void analyseur_sem(list token)
 		{
 			if(token._token[i+1].type==TOKEN_IDENTIFIER)
 			{
-				printf("The current token: %s\n current in name: %s\n",token._token[i+1].value,id[j].name);
+				
 				j=0;
 				bool here=false;
 				while(j<30){
 				 	if(strcmp(token._token[i+1].value,id[j].name)==0)
 					{                       
-						printf("i found %s \n",token._token[i+1].value);
-						printf("variable: %s\n",token._token[i+1].value);
+						
 						here=true;
 						if(token._token[i+2].type==TOKEN_REAL && id[j].type==TOKEN_DEC_INT)
 						{
 							cerruer++;
-							printf("-----------mistake as %s is declared as int-----------\n",token._token[i+1].value);
+							printf("--------------------------------------\n");
+							printf("mistake as %s is declared as int\n",token._token[i+1].value);
+							printf("--------------------------------------\n");
+						}
+						else
+						{
+							if(token._token[i+2].type==TOKEN_REAL) strcpy(id[j].value,token._token[i+2].value);
+							else if(token._token[i+2].type==TOKEN_INT) strcpy(id[j].value,token._token[i+2].value);
 						}
 					}
 					j++;
 				}
 				if(here==false)
 				{
-				printf("-----------u are using a none declare variable %s-----------\n",token._token[i+1].value);
+				printf("--------------------------------------\n");
+				printf("u are using a none declare variable %s\n",token._token[i+1].value);
+				printf("--------------------------------------\n");
 				cerruer++;
 				
 				}
@@ -119,16 +129,74 @@ void analyseur_sem(list token)
 		}
 		if(token._token[i].type==TOKEN_DIV)
 		{
-			printf("div good \n");
-			if(token._token[i+5].type==TOKEN_INT||token._token[i+5].type==TOKEN_REAL||token._token[i+5].type==TOKEN_IDENTIFIER)
+			
+			if(token._token[i+5].type==TOKEN_INT||token._token[i+5].type==TOKEN_REAL)
 			{
-				printf("correct condition \n");
+				
 				if(strcmp(token._token[i+5].value,"0"))
 				{
-					printf("-----------DEVISION BY 0!! MATH ERROR-----------\n");
+					printf("--------------------------------------\n");
+					printf("DEVISION BY 0!! MATH ERROR\n");
+					printf("--------------------------------------\n");
 					cerruer++;
 				}
 			}
+			else if(token._token[i+5].type==TOKEN_IDENTIFIER)
+			{
+				j=0;
+				while(j<30)
+				{
+					if(strcmp(token._token[i+5].value,id[j].name)==0)
+					{
+						if(strcmp(id[j].value,"0")==0)
+						{
+							printf("--------------------------------------\n");
+							printf("DEVISION BY 0 IN VARIABLE %s!! MATH ERROR\n",id[j].name);
+							printf("--------------------------------------\n");
+							cerruer++;
+						}
+					}
+					j++;
+				}
+			}
+		}
+		if(token._token[i].type==TOKEN_GET)
+		{
+			int pos1,pos2;
+			char temp[100];
+			if(token._token[i+1].type==TOKEN_IDENTIFIER)
+			{
+				j=0;
+				while(j<30)
+				{
+					if(strcmp(token._token[i+1].value,id[j].name)==0)
+					{
+						pos1=j;
+					}
+					j++;
+				}
+			}
+			if(token._token[i+3].type==TOKEN_IDENTIFIER)
+			{
+				j=0;
+				while(j<30)
+				{
+					if(strcmp(token._token[i+3].value,id[j].name)==0)
+					{
+						pos2=j;
+					}
+					j++;
+				}
+			}
+			if(id[pos1].type!=id[pos2].type)
+			{
+				printf("--------------------------------------\n");
+				printf("ERROR! U CANT GIVE VARIABLE OF DIFFERENT TYPING\n");
+				printf("--------------------------------------\n");
+				cerruer++;	
+			}
+			
+			
 		}
 			
 		
@@ -149,3 +217,4 @@ void analyseur_sem(list token)
 }
 
 #endif
+

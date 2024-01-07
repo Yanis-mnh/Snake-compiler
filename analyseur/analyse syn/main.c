@@ -17,7 +17,7 @@ struct list tokenList;
 int main(int argc,char *argv[])
 {
 	
-	FILE *token = fopen("../analyse lex/token_table.temp","rb");
+	FILE *token = fopen("C:\\Users\\PC\\Documents\\Snake_compiler\\token_table.temp","rb");
 	if(token== NULL)
 	{
 		perror("ERROR D\'OVERTURE DU FUCHIER");

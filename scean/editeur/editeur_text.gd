@@ -69,12 +69,24 @@ func on_analyse(id):
 			OS.kill(pid);
 			console.popup()
 		analysuer.anal_syn:
-			var result:String = "work in progress return later"
+			var exePath = "analyseur/analyse syn/analyseur-syn.exe"
+			var arg = [current_file]
+			var out_put=[]
+			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
+			print(pid)
+			var result:String = array_to_string(out_put)
 			console_text.text = result
+			OS.kill(pid);
 			console.popup()
 		analysuer.anal_sem:
-			var result:String = "work in progress return later"
+			var exePath = "analyseur/analyse sem/analyseur-sem.exe"
+			var arg = [current_file]
+			var out_put=[]
+			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
+			print(pid)
+			var result:String = array_to_string(out_put)
 			console_text.text = result
+			OS.kill(pid);
 			console.popup()
 
 #function de getion des button fichier
