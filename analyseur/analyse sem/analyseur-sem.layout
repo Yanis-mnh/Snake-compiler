@@ -12,8 +12,9 @@ TopLine=1
 LeftChar=1
 [Editor_3]
 CursorRow=50
-TopLine=7
+TopLine=10
 LeftChar=1
+CursorCol=1
 [Editor_5]
 CursorCol=1
 CursorRow=1
@@ -23,4 +24,12 @@ LeftChar=1
 CursorCol=23
 CursorRow=20
 TopLine=1
+LeftChar=1
+[Editors]
+Order=3,2,1
+Focused=1
+[Editor_1]
+CursorCol=1
+CursorRow=1
+TopLine=62
 LeftChar=1
