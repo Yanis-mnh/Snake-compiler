@@ -424,22 +424,3 @@ void analyseur_lex(FILE *file) {
 		if(tokenList._token[i].type == tokenType.TOKEN_IDENTIFIER)
 		printf("id: ",tokenList._token[i].value);
 }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

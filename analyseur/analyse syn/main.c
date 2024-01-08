@@ -17,7 +17,7 @@ struct list tokenList;
 int main(int argc,char *argv[])
 {
 	
-	FILE *token = fopen("C:\\Users\\PC\\Documents\\Snake_compiler\\token_table.temp","rb");
+	FILE *token = fopen("token_table.temp","rb");
 	if(token== NULL)
 	{
 		perror("ERROR D\'OVERTURE DU FUCHIER");
@@ -33,7 +33,7 @@ int main(int argc,char *argv[])
 	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
 	analyseur_syn(tokenList);
 	
-	
+	printf("Fin analyse syntaxique");
 	
 	
 	
