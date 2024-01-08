@@ -1,4 +1,4 @@
-Snk_Begin
+Snk_Begi
 	Snk_Int _i, j, x1, x2,somme $
 	Snk_Real x3 $
 	Set _i 33 $
@@ -28,4 +28,4 @@ Snk_Begin
 		Snk_Print _i$
 	End
 $$ ceci est un commentaire sur une ligne
-Snk_End
+Snk_En

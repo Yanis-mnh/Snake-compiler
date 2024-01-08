@@ -3,6 +3,7 @@
 	
 	#include <stdio.h>
 	#include <stdlib.h>
+	#include <stdbool.h>
 	#include <string.h>
 	#include "../analyse lex/datatype.h"
 	#include "../analyse lex/tokenList.h"
@@ -42,6 +43,41 @@ typedef enum {
 *
 */
 //struct id
+
+
+int nbrErreur = 1;
+
+void isCorectLayout(list tokenList)
+{
+	if(tokenList._token[0].type != TOKEN_SNK_BEGIN  ){
+		nbrErreur ++;
+		printf("ERROR: ligne %d le programme doit tojour comencer par SNK_BEGIN\n",tokenList.line[0]);
+	}
+	if(tokenList._token[tokenList.nbrToken-1].type != TOKEN_SNK_END  ){
+		nbrErreur ++;
+		printf("ERROR: ligne %d le programme doit tojour finir par SNK_BEGIN\n",tokenList.line[tokenList.nbrToken-1]);
+	}
+}
+
+
+
+
+void analyseur_syn(list tokenList)
+{
+	isCorectLayout(tokenList);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
