@@ -1,11 +1,9 @@
-Snk_Begi
-	Snk_Int _i, j, x1, x2,somme $
-	Snk_Real x3 $
+Snk_Begin
+	Snk_Int i ,r $
+	Snk_Real x3,f $
 	Set _i 33 $
-	If [ _i<50]
-	Begin
+	If [ _i > 50]
 		Set x1 10 $
-	End
 	Else
 	Begin
 		Get x2 from x3 $
@@ -28,4 +26,4 @@ Snk_Begi
 		Snk_Print _i$
 	End
 $$ ceci est un commentaire sur une ligne
-Snk_En
+Snk_End

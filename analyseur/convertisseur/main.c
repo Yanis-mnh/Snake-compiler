@@ -32,7 +32,7 @@ int main(int argc,char *argv[])
 	//affiche(tokenList);
 	
 	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
-	analyseur_syn(tokenList);
+	convert(tokenList);
 	
 	
 	
