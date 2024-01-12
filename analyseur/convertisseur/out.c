@@ -1,5 +1,5 @@
 #include <stdio.h>
 int main(){
-int x1 ;x1 = 0; while ( x1  <  30 ){printf(" %d " , x1); x1 =  x1 +  1 ;}
+int i ;printf("%d" , i);if( i  <  10 ){int j ; i =  i +  1 ;}
  return 0; 
 }

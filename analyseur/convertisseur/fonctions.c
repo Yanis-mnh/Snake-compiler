@@ -159,11 +159,11 @@ void convert(list tokenList)
 					i++;
 					if(tokenList._token[i].type == TOKEN_IDENTIFIER)
 					{
-						fprintf(g,"printf(\" %%d \" , %s);", tokenList._token[i].value);	
+						fprintf(g,"printf(\"%%d\" , %s);", tokenList._token[i].value);	
 					}
 					else if(tokenList._token[i].type == TOKEN_STRING)
 					{
-						fprintf(g,"printf(\" %s \");", tokenList._token[i].value);	
+						fprintf(g,"printf(\"%s\");", tokenList._token[i].value);	
 					}
 				}
 				
@@ -175,7 +175,8 @@ void convert(list tokenList)
 		i++;
 	}
 	fclose(g);
-	
+	system("gcc out.c -o Snk_out");
+	system(".\\Snk_out");
 }
 
 

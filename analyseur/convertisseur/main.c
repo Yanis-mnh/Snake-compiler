@@ -35,11 +35,13 @@ int main(int argc,char *argv[])
 	convert(tokenList);
 	
 	
-	
-	
-	
 	//fin programme
 	fclose(token);
+	
+	//wait
+	printf("\n");
+	fflush(stdout);
+	getc(stdin);
 	return 0;
 	
 }

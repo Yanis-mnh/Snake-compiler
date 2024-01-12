@@ -48,12 +48,24 @@ typedef enum {
 int nbrErreur = 0;
 int i =1;
 
+
+
+void nbrError()
+{
+	if(nbrErreur == 0)
+	{
+		printf("aucune erreur a signaler");
+	}else{
+		printf("compilation failed with %d error",nbrErreur);
+	}
+}
+
 //pour savoir si le i depace le nombre totale des token dans le fichier source :)
 void checkToken(list tokenList)
 {
 	if(i >= tokenList.nbrToken)
 	{	
-		printf("erreur");
+		nbrError();
 		exit(EXIT_FAILURE);
 	}
 }
@@ -74,13 +86,6 @@ void isCorectLayout(list tokenList)
 
 
 
-
-
-
-
-
-
-
 //proceduer pour identifier les declaration
 /*
 Snk_Int i ,r $
@@ -95,7 +100,6 @@ bool isDeclaration(list tokenList) {
 
         // Vérification des identifiants
         while (tokenList._token[i].type != TOKEN_FIN_LIGNE) {
-            
 			if (tokenList._token[i].type == TOKEN_IDENTIFIER) {
                 i++;
                 checkToken(tokenList);
@@ -143,7 +147,7 @@ bool isComparison(tokenType token){
 
 //condition
 //[ _i<50]
-void condition(list tokenList)
+bool condition(list tokenList)
 {
 	if(tokenList._token[i].type == TOKEN_OPEN_BRACKET)
 	{
@@ -171,11 +175,63 @@ void condition(list tokenList)
 				
 			}
 		}
-		
+		if(tokenList._token[i].type == TOKEN_CLOSE_BRACKET)
+		{
+			return true;
+		}
 	}
+	return false;
 		
 }
+//condition If[coparison] and While[conparison]
+void conditionIf(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_IF || tokenList._token[i].type == TOKEN_WHILE )
+	{
+		i++;
+		checkToken(tokenList);
+		if(condition(tokenList))
+		{
+			i++;
+			checkToken(tokenList);
+			if(tokenList._token[i].type == TOKEN_BEGIN)
+			{
+				int beginPos =i;
+				while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_END)
+				{
+					
+					isDeclaration(tokenList);
+					conditionIf(tokenList);
+					i++;
+				}
+				if(tokenList._token[i].type != TOKEN_END)
+				{
+					printf("ligne : %d\n\tERREUR : un Begin non fermer\n", tokenList.line[beginPos]);
+					nbrErreur++;
+				}
+			}else
+				i--;
+		}else{
+			printf("ligne : %d\n\tERREUR : expected a valide condition after If or While token \n", tokenList.line[i]);
+			nbrErreur++;
+		}
+		
+	}
+	return;
+}
 
+
+
+//condition Else doit avoir un if avant
+
+
+void blockDeCode(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_BEGIN && tokenList._token[i-1].type != TOKEN_CLOSE_BRACKET)
+	{
+		printf("ligne : %d\n\tERREUR : expected ']' before \"Begin\" token \n", tokenList.line[i]);
+	}
+}
 
 
 
@@ -189,25 +245,12 @@ void analyseur_syn(list tokenList)
 	while( i < tokenList.nbrToken)
 	{
 		isDeclaration(tokenList);
-		condition(tokenList);
+		conditionIf(tokenList);
+		blockDeCode(tokenList);
 		i++;
 	}
-	if(nbrErreur == 0)
-	{
-		printf("aucune erreur a signaler");
-	}else{
-		printf("compilation failed with %d error",nbrErreur);
-	}
+	nbrError();
 }
-
-
-
-
-
-
-
-
-
 
 
 
