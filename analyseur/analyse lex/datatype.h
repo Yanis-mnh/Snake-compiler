@@ -33,7 +33,11 @@ typedef enum {
 	TOKEN_IDENTIFIER, //23
 	TOKEN_INT, //24
     TOKEN_REAL, //25
-    TOKEN_STRING //26
+    TOKEN_STRING, //26
+    //////////////////////
+    TOKEN_EQUEL, //27
+    TOKEN_INF_EQ, //28
+    TOKEN_SUP_EQ //29
     
 }tokenType;
 
@@ -46,6 +50,8 @@ typedef struct{
 	char value[50];
 
 }token;
+
+//structeur pour un id
 typedef struct {
         char name[30];
         char value[50];

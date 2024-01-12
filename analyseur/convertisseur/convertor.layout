@@ -1,0 +1,34 @@
+[Editors]
+Order=0,1,2,3,4
+Focused=1
+[Editor_0]
+CursorCol=17
+CursorRow=43
+TopLine=16
+LeftChar=1
+[Editor_1]
+<<<<<<< HEAD
+CursorCol=7
+CursorRow=185
+TopLine=156
+=======
+CursorCol=7
+CursorRow=61
+TopLine=30
+>>>>>>> 6fbda3c5058ff069a50add0226440174b011e75d
+LeftChar=1
+[Editor_2]
+CursorCol=1
+CursorRow=6
+TopLine=1
+LeftChar=1
+[Editor_3]
+CursorCol=1
+CursorRow=5
+TopLine=1
+LeftChar=1
+[Editor_4]
+CursorCol=27
+CursorRow=23
+TopLine=1
+LeftChar=1

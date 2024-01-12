@@ -138,7 +138,7 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
 	    '>',
 	    '<'
 	};
-    // Vérification si le mot est un mot-clé
+    // verefication symbol cle
     int i;
 	for (i = 0; i <= 6; i++) {
         if (symbole == KEYSYM[i]) {

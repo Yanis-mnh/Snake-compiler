@@ -18,9 +18,10 @@ int main(int argc,char *argv[])
 {
 	
 	FILE *token = fopen("../analyse lex/token_table.temp","rb");
+	//FILE *token = fopen("../token_table.temp","rb");
 	if(token== NULL)
 	{
-		perror("ERROR D\'OVERTURE DU FUCHIER");
+		printf("ERROR D\'OVERTURE DU FUCHIER");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -30,16 +31,17 @@ int main(int argc,char *argv[])
 	//just pour tester la connexion entre lex et syn
 	//affiche(tokenList);
 	
-	
 	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
-	analyseur_sem(tokenList);
-	
-	
-	
+	convert(tokenList);
 	
 	
 	//fin programme
 	fclose(token);
+	
+	//wait
+	printf("\n");
+	fflush(stdout);
+	getc(stdin);
 	return 0;
 	
 }

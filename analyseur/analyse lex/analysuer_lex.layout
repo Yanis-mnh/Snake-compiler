@@ -1,24 +1,34 @@
 [Editors]
 Order=0,1,2,3,5,4
 <<<<<<< HEAD
+<<<<<<< HEAD
 Focused=1
+=======
+Focused=2
+>>>>>>> fix_syn
 =======
 <<<<<<< HEAD
 Focused=2
 [Editor_0]
-CursorCol=4
+CursorCol=2
 CursorRow=22
 TopLine=2
 LeftChar=1
 [Editor_1]
+<<<<<<< HEAD
 CursorCol=4
 CursorRow=426
 TopLine=378
+=======
+CursorCol=25
+CursorRow=133
+TopLine=104
+>>>>>>> fix_syn
 LeftChar=1
 [Editor_2]
-CursorCol=12
-CursorRow=46
-TopLine=14
+CursorCol=15
+CursorRow=13
+TopLine=4
 =======
 Focused=1
 LeftChar=1
