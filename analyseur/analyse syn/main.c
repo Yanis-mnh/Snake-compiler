@@ -33,9 +33,7 @@ int main(int argc,char *argv[])
 	
 	//l'analyseur syntaxique vas etre dans cette fonction qui vas recevoire les token
 	analyseur_syn(tokenList);
-	
-	printf("Fin analyse syntaxique");
-	
+		
 	
 	
 	//fin programme
