@@ -253,8 +253,4 @@ void analyseur_syn(list tokenList)
 }
 
 
-
-
-
-
 #endif
