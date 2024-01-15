@@ -57,7 +57,7 @@ void convert(list tokenList)
 				break;
 			}
 			case TOKEN_SNK_END:{
-				fprintf(g,"%s","\n return 0; \n}");
+				fprintf(g,"%s","\n printf(\"Press Enter to exit...\");\ngetchar();\nreturn 0; \n}");
 				break;
 			}
 			
@@ -176,7 +176,7 @@ void convert(list tokenList)
 	}
 	fclose(g);
 	system("gcc out.c -o Snk_out");
-	system(".\\Snk_out");
+	//system(".\\Snk_out");
 }
 
 

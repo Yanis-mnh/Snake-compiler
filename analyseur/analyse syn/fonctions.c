@@ -7,49 +7,93 @@
 	#include <string.h>
 	#include "../analyse lex/datatype.h"
 	#include "../analyse lex/tokenList.h"
-/*  ///////////  juste pour savoire les token ont cette structeur ils sont dans datatype.h dont nead de la redeclarer //////////////////////
-*
-typedef enum {
-    //token for mot cle start from 0 to 15
-	TOKEN_SNK_BEGIN,
-	TOKEN_DEC_INT,
-	TOKEN_DEC_REAL,
-	TOKEN_BEGIN,
-	TOKEN_SET,
-	TOKEN_IF,
-	TOKEN_ELSE,
-	TOKEN_GET,
-	TOKEN_SNK_PRINT,
-	TOKEN_SNK_END,
-	TOKEN_WHILE,
-	TOKEN_END,
-	TOKEN_ADD,
-	TOKEN_SUB,
-	TOKEN_MUL,
-	TOKEN_DIV,
-    //symbole token start form 16 to 21
-	TOKEN_FIN_LIGNE,
-	TOKEN_OPEN_BRACKET,
-	TOKEN_CLOSE_BRACKET,
-	TOKEN_COMMA,
-	TOKEN_GRREATER,
-	TOKEN_INFERIOR,
-	//token for other start from 21 to 23
-	TOKEN_IDENTIFIER,
-	TOKEN_INT,
-    TOKEN_REAL
-    
-}tokenType;
-*
-*/
-//struct id
+
 
 
 int nbrErreur = 0;
 int i =1;
 
+//reference for the private function 
+void walk(list tokenList);
+void blockDeCode(list tokenList);
+void nbrError();
+void checkToken(list tokenList);
+void isCorectLayout(list tokenList);
+bool isDeclaration(list tokenList);
+bool isComparison(tokenType token);
+void conditionIf(list tokenList);
+void conditionWhile(list tokenList);
 
 
+
+//walk the code
+void walk(list tokenList)
+{
+	isDeclaration(tokenList);
+	conditionIf(tokenList);
+	blockDeCode(tokenList);
+	conditionWhile(tokenList);
+	if(tokenList._token[i].type == TOKEN_ELSE){
+		printf("ligne : %d\n\tERREUR : expected \"If\" before \"Else\" token \n",tokenList.line[i]);
+		nbrErreur++;
+	}
+}
+
+
+//la fonction pour analyser le ficheir token (la fonctionne que main vas lancer)
+void analyseur_syn(list tokenList)
+{
+	
+	isCorectLayout(tokenList);
+	
+	while( i < tokenList.nbrToken)
+	{
+		walk(tokenList);
+		i++;
+	}
+	nbrError();
+}
+
+
+/*
+*
+* all private fonctionne strat here the fonction that will not get out from fonction.c
+*	those fonctionne are for analyse syntaxique 
+*	they are like abstract way to represent automate
+*
+*/
+
+
+
+//est-il un nbr (real or int)
+bool isNum(tokenType token)
+{
+	switch(token){
+		case TOKEN_INT:
+		case TOKEN_REAL:
+			return true;
+		default :
+			return false;
+	}
+}
+
+//is symbole de comparison
+bool isComparison(tokenType token){
+	
+	switch(token)
+	{
+		case TOKEN_EQUEL: 
+		case TOKEN_INF_EQ:
+		case TOKEN_SUP_EQ:
+		case TOKEN_GRREATER:
+		case TOKEN_INFERIOR:
+			return true;
+		default :
+			return false;
+	}
+}
+
+//get nbr erreur du code
 void nbrError()
 {
 	if(nbrErreur == 0)
@@ -58,6 +102,19 @@ void nbrError()
 	}else{
 		printf("compilation failed with %d error",nbrErreur);
 	}
+}
+
+
+//block de code
+void blockDeCode(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_BEGIN  )
+		if( tokenList._token[i-1].type != TOKEN_CLOSE_BRACKET && tokenList._token[i-1].type != TOKEN_ELSE)
+		{
+			printf("ligne : %d\n\tERREUR : expected ']' before \"Begin\" token \n", tokenList.line[i]);
+			nbrErreur++;
+		}
+	
 }
 
 //pour savoir si le i depace le nombre totale des token dans le fichier source :)
@@ -70,7 +127,8 @@ void checkToken(list tokenList)
 	}
 }
 
-//
+
+//check if it start with Snk_begin and end with Snk_End
 void isCorectLayout(list tokenList)
 {
 	if(tokenList._token[0].type != TOKEN_SNK_BEGIN  ){
@@ -84,8 +142,6 @@ void isCorectLayout(list tokenList)
 }
 
 
-
-
 //proceduer pour identifier les declaration
 /*
 Snk_Int i ,r $
@@ -93,12 +149,12 @@ Snk_Real x3,f $
 */
 bool isDeclaration(list tokenList) {
 
-    // Vérification de la déclaration
+    // Verification de la declaration
     if (tokenList._token[i].type == TOKEN_DEC_INT || tokenList._token[i].type == TOKEN_DEC_REAL) {
         i++;
         checkToken(tokenList);
 
-        // Vérification des identifiants
+        // Verification des identifiants
         while (tokenList._token[i].type != TOKEN_FIN_LIGNE) {
 			if (tokenList._token[i].type == TOKEN_IDENTIFIER) {
                 i++;
@@ -129,34 +185,19 @@ bool isDeclaration(list tokenList) {
     }
 }
 
-//combarison
-bool isComparison(tokenType token){
-	
-	switch(token)
-	{
-		case TOKEN_EQUEL: 
-		case TOKEN_INF_EQ:
-		case TOKEN_SUP_EQ:
-		case TOKEN_GRREATER:
-		case TOKEN_INFERIOR:
-			return true;
-		default :
-			return false;
-	}
-}
 
-//condition
-//[ _i<50]
+//is it a valide condition
+//[ _i<50] or [1] 
 bool condition(list tokenList)
 {
 	if(tokenList._token[i].type == TOKEN_OPEN_BRACKET)
 	{
 		i++;
 		checkToken(tokenList);
-		while(tokenList._token[i].type != TOKEN_CLOSE_BRACKET)
+		do
 		{
 			
-			if(tokenList._token[i].type == TOKEN_IDENTIFIER || tokenList._token[i].type == TOKEN_INT || tokenList._token[i].type == TOKEN_REAL)
+			if(tokenList._token[i].type == TOKEN_IDENTIFIER || isNum(tokenList._token[i].type) )
 			{
 				i++;
 				checkToken(tokenList);
@@ -173,8 +214,11 @@ bool condition(list tokenList)
 					break;
 				}
 				
+			}else{
+				return false;
 			}
-		}
+		}while(tokenList._token[i].type != TOKEN_CLOSE_BRACKET);
+		
 		if(tokenList._token[i].type == TOKEN_CLOSE_BRACKET)
 		{
 			return true;
@@ -183,10 +227,80 @@ bool condition(list tokenList)
 	return false;
 		
 }
-//condition If[coparison] and While[conparison]
+
+
+void conditionElseIf(list tokenList)
+{
+	i++;
+	checkToken(tokenList);
+	if(tokenList._token[i].type == TOKEN_BEGIN)
+	{
+		int beginPos =i;
+		while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_END)
+		{
+			walk(tokenList);
+			i++;
+		}
+		if(tokenList._token[i].type != TOKEN_END)
+		{
+			printf("ligne : %d\n\tERREUR : un Begin non fermer\n", tokenList.line[beginPos]);
+			nbrErreur++;
+		}
+		i++;
+		checkToken(tokenList);
+		if(tokenList._token[i].type == TOKEN_ELSE)
+		{
+			conditionElseIf(tokenList);
+			return;
+		}
+		i--;
+	}
+	else if(tokenList._token[i].type != TOKEN_IF && tokenList._token[i].type != TOKEN_WHILE )
+	{
+		while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_FIN_LIGNE)
+		{
+			walk(tokenList);
+			i++;
+		}
+		i++;
+		checkToken(tokenList);
+		if(tokenList._token[i].type == TOKEN_ELSE)
+		{
+			conditionElseIf(tokenList);
+			return;
+		}
+		i--;
+		
+	}else i--;
+	
+	return;
+}
+
+//condition If[coparison] (1) Else | no (2) Else If | no
 void conditionIf(list tokenList)
 {
-	if(tokenList._token[i].type == TOKEN_IF || tokenList._token[i].type == TOKEN_WHILE )
+	if(tokenList._token[i].type == TOKEN_IF )
+	{
+		i++;
+		checkToken(tokenList);
+		if(condition(tokenList))
+		{
+			conditionElseIf(tokenList);
+			
+		}else{
+			printf("ligne : %d\n\tERREUR : expected a valide condition after If token \n", tokenList.line[i]);
+			nbrErreur++;
+		}
+		
+	}
+	return;
+}
+
+
+//condition While[coparison] and While[conparison]
+void conditionWhile(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_WHILE )
 	{
 		i++;
 		checkToken(tokenList);
@@ -200,8 +314,7 @@ void conditionIf(list tokenList)
 				while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_END)
 				{
 					
-					isDeclaration(tokenList);
-					conditionIf(tokenList);
+					walk(tokenList);
 					i++;
 				}
 				if(tokenList._token[i].type != TOKEN_END)
@@ -212,7 +325,7 @@ void conditionIf(list tokenList)
 			}else
 				i--;
 		}else{
-			printf("ligne : %d\n\tERREUR : expected a valide condition after If or While token \n", tokenList.line[i]);
+			printf("ligne : %d\n\tERREUR : expected a valide condition after While token \n", tokenList.line[i]);
 			nbrErreur++;
 		}
 		
@@ -220,37 +333,7 @@ void conditionIf(list tokenList)
 	return;
 }
 
-
-
 //condition Else doit avoir un if avant
-
-
-void blockDeCode(list tokenList)
-{
-	if(tokenList._token[i].type == TOKEN_BEGIN && tokenList._token[i-1].type != TOKEN_CLOSE_BRACKET)
-	{
-		printf("ligne : %d\n\tERREUR : expected ']' before \"Begin\" token \n", tokenList.line[i]);
-	}
-}
-
-
-
-
-
-void analyseur_syn(list tokenList)
-{
-	
-	isCorectLayout(tokenList);
-	
-	while( i < tokenList.nbrToken)
-	{
-		isDeclaration(tokenList);
-		conditionIf(tokenList);
-		blockDeCode(tokenList);
-		i++;
-	}
-	nbrError();
-}
 
 
 #endif

@@ -17,7 +17,8 @@ struct list tokenList;
 int main(int argc,char *argv[])
 {
 	
-	FILE *token = fopen("../analyse lex/token_table.temp","rb");
+	argv[1] = "../analyse lex/token_table.temp";
+	FILE *token = fopen( argv[1],"rb");
 	//FILE *token = fopen("../token_table.temp","rb");
 	if(token== NULL)
 	{
@@ -27,6 +28,7 @@ int main(int argc,char *argv[])
 	
 	fread(&tokenList,sizeof(list),1,token);
 	
+	fclose(token);
 	
 	//just pour tester la connexion entre lex et syn
 	//affiche(tokenList);
@@ -36,8 +38,6 @@ int main(int argc,char *argv[])
 		
 	
 	
-	//fin programme
-	fclose(token);
 	return 0;
 	
 }

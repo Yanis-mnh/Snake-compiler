@@ -1,27 +1,10 @@
 Snk_Begin
-	Snk_Int i, j, x1, x2,somme $
-	Snk_Real x3 $
-	Set i 33 $
-	If [i<50]
+	Snk_Int i$
+	Set i 0$
+	While [i<100]
 	Begin
-		Set x1 10 $
+		Add i,i,1$
+		Snk_Print "la valeur de i est :  ",i,"\n"$
 	End
-	Else
-	Begin 
-		Get x2 from x3 $
-		Set k 43.5 $
-		Snk_Print x2, x3 $
- 	End
-	Snk_Print " Hello :)"  $
-	Snk_Print i,j $
-	While[i<50]
-	Begin
-		$$comantaire sur +ieur ligne est # bla bla #
-		#multi-line comments
-		like this #
 
-		Add somme,i,1$
-		Snk_Print i$
-	End
-$$ ceci est un commentaire sur une ligne
 Snk_End

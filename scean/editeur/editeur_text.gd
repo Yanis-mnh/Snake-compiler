@@ -10,7 +10,8 @@ enum file_option{
 enum analysuer{
 	anal_lex,
 	anal_syn,
-	anal_sem
+	anal_sem,
+	run
 	}
 
 @onready var dropMenuFile = $"title bar/MenuBar/HBoxContainer/MenuButton"
@@ -70,7 +71,7 @@ func on_analyse(id):
 			console.popup()
 		analysuer.anal_syn:
 			var exePath = "analyseur/analyse syn/analyseur-syn.exe"
-			var arg = [current_file]
+			var arg = ["token_table.temp"]
 			var out_put=[]
 			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
 			print(pid)
@@ -80,13 +81,28 @@ func on_analyse(id):
 			console.popup()
 		analysuer.anal_sem:
 			var exePath = "analyseur/analyse sem/analyseur-sem.exe"
-			var arg = [current_file]
+			var arg = ["token_table.temp"]
 			var out_put=[]
 			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
 			print(pid)
 			var result:String = array_to_string(out_put)
 			console_text.text = result
 			OS.kill(pid);
+			console.popup()
+		analysuer.run:
+			var exePath = "analyseur/convertisseur/convertor.exe"
+			var arg = ["token_table.temp"]
+			var out_put=[]
+			var pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,false)
+			OS.kill(pid);
+			await get_tree().create_timer(1).timeout
+			exePath = "Snk_out.exe"
+			arg = [""]
+			out_put=[]
+			pid = OS.execute(exePath,PackedStringArray(arg),out_put,false,true)
+			OS.kill(pid);
+			var result:String = array_to_string(out_put)
+			console_text.text = result
 			console.popup()
 
 #function de getion des button fichier

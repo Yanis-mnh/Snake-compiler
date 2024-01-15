@@ -17,11 +17,11 @@ struct list tokenList;
 int main(int argc,char *argv[])
 {
 	
-	FILE *token = fopen("../analyse lex/token_table.temp","rb");
-	//FILE *token = fopen("../token_table.temp","rb");
+	//argv[1] = "../analyse lex/token_table.temp";
+	FILE *token = fopen(argv[1],"rb");
 	if(token== NULL)
 	{
-		printf("ERROR D\'OVERTURE DU FUCHIER");
+		perror("ERROR D\'OVERTURE DU FUCHIER");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -38,10 +38,6 @@ int main(int argc,char *argv[])
 	//fin programme
 	fclose(token);
 	
-	//wait
-	printf("\n");
-	fflush(stdout);
-	getc(stdin);
 	return 0;
 	
 }

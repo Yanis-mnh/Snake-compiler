@@ -2,7 +2,7 @@
 Order=0,1,2,3,5,4
 <<<<<<< HEAD
 <<<<<<< HEAD
-Focused=1
+Focused=0
 =======
 Focused=2
 >>>>>>> fix_syn
@@ -10,7 +10,7 @@ Focused=2
 <<<<<<< HEAD
 Focused=2
 [Editor_0]
-CursorCol=2
+CursorCol=4
 CursorRow=22
 TopLine=2
 LeftChar=1

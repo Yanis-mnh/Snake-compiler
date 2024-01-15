@@ -1,4 +1,23 @@
-Snk_Begin 
-	Snk_Int x1,x2$
-	Set x1,10$
-Snk_End 
+Snk_Begin
+    Snk_Int exponent$
+    Set exponent 4$
+
+    Snk_Int result$
+    Set result 1$
+
+    $$ Initialize a counter for the loop
+    Snk_Int counter$
+    Set counter 0$
+
+    $$ Calculate 2^n using a While loop
+    While[counter < exponent]
+    Begin
+        $$ Multiply the result by 2 in each iteration
+        Mul result, result, 2$
+
+        $$ Increment the counter
+        Add counter, counter, 1$
+    End
+
+    Snk_Print "2 raised to the power of " , exponent , " is: ",result$
+Snk_End

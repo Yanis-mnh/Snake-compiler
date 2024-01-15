@@ -1,18 +1,33 @@
 Snk_Begin
-	Snk_Int i$
-	Snk_Print i$
-	
-	If[i < 10]
-		If[i> 10]
-		Begin
-			Snk_Int j$
-			Add i,i,1$
-			If[i> 10]
-			Begin
-				Snk_Int j$
-				Add i,i,1$
-			End
-		End
-		
-	
+    Snk_Int i, j, x1, x2, y1, y2 $
+    Snk_Real x3, x4 $
+    Set i 33 $
+
+    If[10 > 2]
+    Begin
+        If[y2 > 10]
+            If[10 > 30]
+            Begin
+                Set x1 10 $
+                Set x2 20 $
+            End
+            Else
+            Begin
+                Set y1 30 $
+                Set y2 50 $
+                Add y1, y2, y1 $
+            End
+    End
+    Else
+    Begin
+        Get x4 from x3 $
+        Snk_Print x2, x3 $
+    End
+    
+    Snk_Print " Hello :)\n" $
+    Snk_Print i, j $
+    If[i < 50]
+        Snk_Print i $
+
+$$ ceci est un commentaire
 Snk_End
