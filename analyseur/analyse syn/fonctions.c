@@ -438,6 +438,8 @@ void conditionElseIf(list tokenList)
 	if(tokenList._token[i].type == TOKEN_BEGIN)
 	{
 		int beginPos =i;
+		i++;
+		checkToken(tokenList);
 		while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_END)
 		{
 			walk(tokenList);
@@ -459,11 +461,8 @@ void conditionElseIf(list tokenList)
 	}
 	else if(tokenList._token[i].type != TOKEN_IF && tokenList._token[i].type != TOKEN_WHILE )
 	{
-		while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_FIN_LIGNE)
-		{
-			walk(tokenList);
-			i++;
-		}
+		walk(tokenList);
+			
 		i++;
 		checkToken(tokenList);
 		if(tokenList._token[i].type == TOKEN_ELSE)
@@ -471,7 +470,6 @@ void conditionElseIf(list tokenList)
 			conditionElseIf(tokenList);
 			return;
 		}
-		i--;
 		
 	}else i--;
 	

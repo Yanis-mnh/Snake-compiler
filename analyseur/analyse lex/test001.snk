@@ -1,4 +1,9 @@
-
 Snk_Begin
-Add x1,10,x1 $
+	Snk_Int i$
+	Set i 5$
+	If[i<=5]
+		Snk_Int i,j,k$
+		
+	Else
+		Snk_Print "fotato \n" $
 Snk_End
