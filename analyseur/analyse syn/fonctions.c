@@ -19,20 +19,25 @@ void blockDeCode(list tokenList);
 void nbrError();
 void checkToken(list tokenList);
 void isCorectLayout(list tokenList);
-bool isDeclaration(list tokenList);
+void declaration(list tokenList);
 bool isComparison(tokenType token);
 void conditionIf(list tokenList);
 void conditionWhile(list tokenList);
+void affect(list tokenList);
+void Snk_Print(list tokenList);
+
 
 
 
 //walk the code
 void walk(list tokenList)
 {
-	isDeclaration(tokenList);
+	declaration(tokenList);
 	conditionIf(tokenList);
 	blockDeCode(tokenList);
 	conditionWhile(tokenList);
+	affect(tokenList);
+	Snk_Print(tokenList);
 	if(tokenList._token[i].type == TOKEN_ELSE){
 		printf("ligne : %d\n\tERREUR : expected \"If\" before \"Else\" token \n",tokenList.line[i]);
 		nbrErreur++;
@@ -77,6 +82,7 @@ bool isNum(tokenType token)
 	}
 }
 
+
 //is symbole de comparison
 bool isComparison(tokenType token){
 	
@@ -103,6 +109,55 @@ void nbrError()
 		printf("compilation failed with %d error",nbrErreur);
 	}
 }
+
+
+
+
+
+//Snk_print pour affichage elle peut afficher des nbr des id ou des String
+void Snk_Print(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_SNK_PRINT)
+	{
+		i++;
+		checkToken(tokenList);
+		while(tokenList._token[i].type != TOKEN_FIN_LIGNE)
+		{
+			
+			if(tokenList._token[i].type == TOKEN_STRING || tokenList._token[i].type == TOKEN_IDENTIFIER || isNum(tokenList._token[i].type) )
+			{
+				i++;
+				checkToken(tokenList);
+				 if (tokenList._token[i].type == TOKEN_COMMA) {
+                    i++;
+                    checkToken(tokenList);
+                    if(tokenList._token[i].type != TOKEN_STRING && tokenList._token[i].type != TOKEN_IDENTIFIER && !isNum(tokenList._token[i].type))
+                    {
+                    	printf("line %d: \n\tERROR: expected somthing to print after a comma\n",tokenList.line[i]);
+                    	nbrErreur++;
+                    	break;
+					}
+                }else if (tokenList._token[i].type == TOKEN_FIN_LIGNE ) {
+                    break;
+                } else {
+                    printf("Line %d: \n\tERROR : Virgule ou Fin de ligne attendue apres un identifiant\n", tokenList.line[i]);
+                    nbrErreur++;
+                    break; // Sortir de la boucle pour éviter des erreurs multiples
+                }
+			}else{
+				printf("Line %d: \n\tERREUR : expected somthing to print \n", tokenList.line[i]);
+			}
+			
+		}
+	}
+}
+
+
+
+
+
+
+
 
 
 //block de code
@@ -147,7 +202,7 @@ void isCorectLayout(list tokenList)
 Snk_Int i ,r $
 Snk_Real x3,f $
 */
-bool isDeclaration(list tokenList) {
+void declaration(list tokenList) {
 
     // Verification de la declaration
     if (tokenList._token[i].type == TOKEN_DEC_INT || tokenList._token[i].type == TOKEN_DEC_REAL) {
@@ -165,7 +220,7 @@ bool isDeclaration(list tokenList) {
                     checkToken(tokenList);
                     if(tokenList._token[i].type != TOKEN_IDENTIFIER)
                     {
-                    	printf("line %d: \n\tERROR: aprere vigule doit avoire un identifien\n",tokenList.line[i]);
+                    	printf("line %d: \n\tERROR: expected id after a comma\n",tokenList.line[i]);
                     	nbrErreur++;
                     	break;
 					}
@@ -184,6 +239,49 @@ bool isDeclaration(list tokenList) {
         }
     }
 }
+
+
+//Set x1 10 $ or Set x1 x2$
+/*
+*	affectation la valeur 10 a x1
+*              ou
+*   affectation de la valeur de la var x2 a x1
+*/
+void affect(list tokenList)
+{
+	if(tokenList._token[i].type != TOKEN_SET) return;
+	
+	i++;
+	checkToken(tokenList);
+	if(tokenList._token[i].type == TOKEN_IDENTIFIER)
+	{
+		i++;
+		checkToken(tokenList);
+		if(isNum(tokenList._token[i].type) || tokenList._token[i].type == TOKEN_IDENTIFIER)
+		{
+			i++;
+			checkToken(tokenList);
+			if(tokenList._token[i].type != TOKEN_FIN_LIGNE)
+			{
+				printf("Line %d: \n\tERREUR : expected Fin de ligne '$' aprer une afectation \n", tokenList.line[i]);
+				i--;
+				nbrErreur++;
+			}
+		}else{
+			nbrErreur++;
+			printf("Line %d: \n\tERREUR : Identifiant or number manquant \n", tokenList.line[i]);
+			i--;
+		}
+			
+	}else{
+		printf("Line %d: \n\tERREUR : Identifiant manquant \n", tokenList.line[i]);
+		nbrErreur++;
+		i--;
+	}
+	
+	
+}
+
 
 
 //is it a valide condition

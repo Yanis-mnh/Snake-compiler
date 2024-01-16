@@ -12,7 +12,57 @@
 
 struct list tokenList;
 
-// Fonction pour vérifier si un mot est un mot-clé
+/*
+*	TOKEN_EQUEL, //27
+*   TOKEN_INF_EQ, //28
+*   TOKEN_SUP_EQ //29
+*/
+
+//fomction operation si cest un operatuer
+bool isOp(char c,int line,FILE *file){
+	
+	if(c == '='){
+		if((c = fgetc(file)) == '=')
+		{
+			
+		}else{
+			ungetc(c,file);
+		}
+	}else if(c == '=')
+	{
+		if((c = fgetc(file)) == '=')
+		{
+			printf("Operateur de comparaison\n");
+			//creation du token
+        	token *_token = malloc(sizeof(token));
+			_token->type = TOKEN_SUP_EQ;
+        	strcpy(_token->value , "");
+			add_to_liste(&tokenList,*_token,line);
+			free(_token);
+			return true;
+		}else{
+			ungetc(c,file);
+		}
+	}else if(c =='<')
+	{
+		if((c = fgetc(file)) == '=')
+		{
+			printf("Operateur de comparaison\n");
+			//creation du token
+        	token *_token = malloc(sizeof(token));
+			_token->type = TOKEN_INF_EQ;
+        	strcpy(_token->value , "");
+			add_to_liste(&tokenList,*_token,line);
+			free(_token);
+			return true;
+		}else{
+			ungetc(c,file);
+		}
+	}
+	return false;
+}
+
+// Fonction pour vérifier si un mot est un mot-cle
 bool isKeyword(const char *word ,int line) {
     // Liste de mots-clés
     //keywords (la liste) est dans "datatype.h"
@@ -36,7 +86,7 @@ bool isKeyword(const char *word ,int line) {
 	    "from"
 	};
 
-    // Vérification si le mot est un mot-clé
+    // Verification si le mot est un mot clef
     int i;
 	for (i = 0; i < sizeof(keywords) / sizeof(keywords[0]); ++i) {
         if (strcmp(word, keywords[i]) == 0) {
@@ -129,14 +179,15 @@ bool isKeyword(const char *word ,int line) {
     }
     return false;
 }
-bool isSymboleCle(char symbole,bool affiche,int line) {
-	const char KEYSYM[6] ={
+bool isSymboleCle(char symbole,bool affiche,int line,FILE *f) {
+	const char KEYSYM[7] ={
 	    '$',
 	    '[',
 	    ']',
 	    ',',
 	    '>',
-	    '<'
+	    '<',
+	    '='
 	};
     // verefication symbol cle
     int i;
@@ -147,28 +198,69 @@ bool isSymboleCle(char symbole,bool affiche,int line) {
 			if(affiche == false)
         		return true;
         	
-        	printf("symbole trouver : %c ",KEYSYM[i]);
+        	printf("symbole trouver : %c",KEYSYM[i]);
         	switch(i)
         	{
         		case 0: {
-					printf("fin de ligne");
+					printf(" fin de ligne");
 					break;
 				}
         		case 1: {
-        			printf("Debut de condition");
+        			printf(" Debut de condition");
 					break;
 				}
         		case 2: {
-        			printf("fin de condition");
+        			printf(" fin de condition");
 					break;
 				}
         		case 3: {
-        			printf("separateur");
+        			printf(" separateur");
 					break;
 				}
-        		case 4: 
+        		case 4: {
+        			if( (symbole = fgetc(f)) == '='  )
+        			{
+        				printf("= Operateur de comparaison\n");
+						//creation du token
+			        	token *_token = malloc(sizeof(token));
+						_token->type = TOKEN_SUP_EQ;
+			        	strcpy(_token->value , "");
+						add_to_liste(&tokenList,*_token,line);
+						free(_token);
+						return true;	
+					}else ungetc(symbole,f);
+					printf(" Operateur de comparaison");
+					break;
+				}
         		case 5:{
-        			printf("Operateur de comparaison");
+        			
+        			if( (symbole = fgetc(f)) == '='  )
+        			{
+        				printf("= Operateur de comparaison\n");
+						//creation du token
+			        	token *_token = malloc(sizeof(token));
+						_token->type = TOKEN_INF_EQ;
+			        	strcpy(_token->value , "");
+						add_to_liste(&tokenList,*_token,line);
+						free(_token);
+						return true;	
+					}else ungetc(symbole,f);
+					printf(" Operateur de comparaison");
+					break;
+				}
+				case 6:{
+					if( (symbole = fgetc(f)) == '='  )
+        			{
+        				printf("= Operateur de comparaison\n");
+						//creation du token
+			        	token *_token = malloc(sizeof(token));
+						_token->type = TOKEN_EQUEL;
+			        	strcpy(_token->value , "");
+						add_to_liste(&tokenList,*_token,line);
+						free(_token);
+						return true;	
+					}else ungetc(symbole,f);
+					printf(" Operateur de comparaison");
 					break;
 				}
 			}
@@ -239,7 +331,7 @@ bool isValideId(char *s,int line)
 			printf("Erreur: (Taille de l'id ne peut pas depasser 31 char)\n");
 			exit(1);
 		}
-		if(!isalnum(s[0]) && s[0] != '_')
+		if(!isalnum(s[i]) && s[i] != '_')
 			return false;
 		
 	}
@@ -315,7 +407,7 @@ void analyseur_lex(FILE *file) {
 		}
 			
 		
-        if (isspace(c)  || isSymboleCle(c,false,line) || c == EOF) 
+        if (isspace(c)  || isSymboleCle(c,false,line,file) || c == EOF) 
 		{
 		
             if (i > 0) // Vérifier si le mot n'est pas vide
@@ -330,11 +422,11 @@ void analyseur_lex(FILE *file) {
                 	printf("cest un nombre real:  %s\n",mot);
                 else if(isValideId(mot,line))
 					printf("identificateur : %s\n",mot);
-				
+				else if(isOp(c,line,file));
 				else
 					printf("Erreur: ( %s dans la ligne: %d)\n",mot,line);
 			}
-			if (isSymboleCle(c,true,line));
+			if (isSymboleCle(c,true,line,file));
             i = 0; // Réinitialiser l'indice du mot
         }
         

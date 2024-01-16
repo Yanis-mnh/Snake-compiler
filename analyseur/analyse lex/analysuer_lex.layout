@@ -16,9 +16,9 @@ TopLine=2
 LeftChar=1
 [Editor_1]
 <<<<<<< HEAD
-CursorCol=4
-CursorRow=426
-TopLine=378
+CursorCol=40
+CursorRow=252
+TopLine=238
 =======
 CursorCol=25
 CursorRow=133
@@ -26,8 +26,8 @@ TopLine=104
 >>>>>>> fix_syn
 LeftChar=1
 [Editor_2]
-CursorCol=15
-CursorRow=13
+CursorCol=5
+CursorRow=38
 TopLine=4
 =======
 Focused=1

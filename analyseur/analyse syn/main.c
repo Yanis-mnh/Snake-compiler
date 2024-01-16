@@ -17,7 +17,7 @@ struct list tokenList;
 int main(int argc,char *argv[])
 {
 	
-	argv[1] = "../analyse lex/token_table.temp";
+	//argv[1] = "../analyse lex/token_table.temp";
 	FILE *token = fopen( argv[1],"rb");
 	//FILE *token = fopen("../token_table.temp","rb");
 	if(token== NULL)
