@@ -1,4 +1,4 @@
 
 Snk_Begin
-Snk_Print x1,c,x2$
+Add x1,10,x1 $
 Snk_End

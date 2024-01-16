@@ -25,8 +25,8 @@ void conditionIf(list tokenList);
 void conditionWhile(list tokenList);
 void affect(list tokenList);
 void Snk_Print(list tokenList);
-
-
+void affectVar(list tokenList);
+void operation(list tokenList);
 
 
 //walk the code
@@ -37,7 +37,9 @@ void walk(list tokenList)
 	blockDeCode(tokenList);
 	conditionWhile(tokenList);
 	affect(tokenList);
+	affectVar(tokenList);
 	Snk_Print(tokenList);
+	operation(tokenList);
 	if(tokenList._token[i].type == TOKEN_ELSE){
 		printf("ligne : %d\n\tERREUR : expected \"If\" before \"Else\" token \n",tokenList.line[i]);
 		nbrErreur++;
@@ -112,6 +114,108 @@ void nbrError()
 
 
 
+
+//est-il une operation Add Sub Mull Div 
+bool isOperation(tokenType token)
+{
+	switch(token)
+	{
+		case TOKEN_ADD:
+		case TOKEN_SUB:
+		case TOKEN_MUL:
+		case TOKEN_DIV:
+			return true;
+	}
+	return false;
+}
+
+// exp: Add x1,x2,x3 => x1 = x2 + x3;
+void operation(list tokenList)
+{
+	if(isOperation(tokenList._token[i].type))
+	{
+		i++;
+		checkToken(tokenList);
+		if(tokenList._token[i].type == TOKEN_IDENTIFIER)
+		{
+			int j=0;
+			for(;j<2;j++)
+			{
+				i++;
+				checkToken(tokenList);
+				if(tokenList._token[i].type == TOKEN_COMMA)
+				{
+					i++;
+					checkToken(tokenList);
+					if(tokenList._token[i].type == TOKEN_IDENTIFIER || isNum(tokenList._token[i].type))
+					{
+						
+					}else{
+						nbrErreur++;
+						printf("line %d: \n\tERROR: expected token id or num after ','\n",tokenList.line[i]);
+						break;
+					}
+				}else{
+					nbrErreur++;
+					printf("line %d: \n\tERROR: expected token ',' after an identifier\n",tokenList.line[i]);	
+					break;
+				}
+			}
+			i++;
+			checkToken(tokenList);
+			if(tokenList._token[i].type != TOKEN_FIN_LIGNE)
+			{
+				nbrErreur++;
+				printf("line %d: \n\tERROR: expected token '$' at the end of a statemets\n",tokenList.line[i]);
+			}
+				
+		}else{
+			nbrErreur++;
+			printf("line %d: \n\tERROR: expected an identifier after an Operator\n",tokenList.line[i]);	
+		}
+	}
+}
+
+
+
+//Get x1 From x2
+void affectVar(list tokenList)
+{
+	if(tokenList._token[i].type == TOKEN_GET)
+	{
+		i++;
+		checkToken(tokenList);
+		if(tokenList._token[i].type == TOKEN_IDENTIFIER)
+		{
+			i++;
+			checkToken(tokenList);
+			if(tokenList._token[i].type == TOKEN_FROM)
+			{
+				i++;
+				checkToken(tokenList);
+				if(tokenList._token[i].type == TOKEN_IDENTIFIER)
+				{
+					i++;
+					checkToken(tokenList);
+					if(tokenList._token[i].type != TOKEN_FIN_LIGNE)
+					{
+						nbrErreur++;
+						printf("line %d: \n\tERROR: fin de ligne \"$\" manquante \n",tokenList.line[i]);	
+					}
+				}else{
+					nbrErreur++;
+					printf("line %d: \n\tERROR: expected an identifier after token \"from\"\n",tokenList.line[i]);		
+				}
+			}else{
+				nbrErreur++;
+				printf("line %d: \n\tERROR: expected token \"from\" after id \n",tokenList.line[i]);	
+			}
+		}else{
+			nbrErreur++;
+			printf("line %d: \n\tERROR: expected an identifier after Get\n",tokenList.line[i]);
+		}
+	}
+}
 
 
 //Snk_print pour affichage elle peut afficher des nbr des id ou des String

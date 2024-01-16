@@ -2,7 +2,7 @@
 Order=0,1,2,3,5,4
 <<<<<<< HEAD
 <<<<<<< HEAD
-Focused=0
+Focused=1
 =======
 Focused=2
 >>>>>>> fix_syn
@@ -10,15 +10,15 @@ Focused=2
 <<<<<<< HEAD
 Focused=2
 [Editor_0]
-CursorCol=4
+CursorCol=2
 CursorRow=22
 TopLine=2
 LeftChar=1
 [Editor_1]
 <<<<<<< HEAD
-CursorCol=40
-CursorRow=252
-TopLine=238
+CursorCol=21
+CursorRow=282
+TopLine=253
 =======
 CursorCol=25
 CursorRow=133
@@ -26,9 +26,9 @@ TopLine=104
 >>>>>>> fix_syn
 LeftChar=1
 [Editor_2]
-CursorCol=5
-CursorRow=38
-TopLine=4
+CursorCol=22
+CursorRow=31
+TopLine=14
 =======
 Focused=1
 LeftChar=1
