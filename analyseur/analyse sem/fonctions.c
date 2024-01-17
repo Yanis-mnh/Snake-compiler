@@ -66,6 +66,18 @@ void analyseur_sem(list token)
 	id id[30];
 	for(;i<token.nbrToken;i++)
 	{
+		
+		if(token._token[i].type==TOKEN_IDENTIFIER)
+		{
+			if(exist(id,token._token[i].value) == false){
+				
+				printf("line %d: u are using a none declare variable %s\n",token.line[i],token._token[i].value);
+				printf("--------------------------------------\n");
+				cerruer++;
+			}
+		}
+		
+		
 		if(token._token[i].type == TOKEN_DEC_INT)
 		{
 			
@@ -79,6 +91,7 @@ void analyseur_sem(list token)
 					if(exist(id,token._token[i].value)==true)
 					{
 						printf("line %d: id value: %s erreur already declared\n",token.line[i],token._token[i].value);
+						printf("--------------------------------------\n");
 						cerruer++;
 					}
 					else
@@ -105,6 +118,7 @@ void analyseur_sem(list token)
 					if(exist(id,token._token[i].value)==true)
 					{
 						printf("line %d: id value: %s erreur already declared\n",token.line[i],token._token[i].value);
+						printf("--------------------------------------\n");
 						cerruer++;
 					}
 					else
@@ -134,7 +148,7 @@ void analyseur_sem(list token)
 						if(token._token[i+2].type==TOKEN_REAL && id[j].type==TOKEN_DEC_INT)
 						{
 							cerruer++;
-							printf("--------------------------------------\n");
+							
 							printf("line %d: mistake as %s is declared as int\n",token.line[i],token._token[i+1].value);
 							printf("--------------------------------------\n");
 						}
@@ -148,10 +162,10 @@ void analyseur_sem(list token)
 				}
 				if(here==false)
 				{
-				printf("--------------------------------------\n");
-				printf("line %d: u are using a none declare variable %s\n",token.line[i],token._token[i+1].value);
-				printf("--------------------------------------\n");
-				cerruer++;
+			//	printf("--------------------------------------\n");
+			//	printf("line %d: u are using a none declare variable %s\n",token.line[i],token._token[i+1].value);
+			//	printf("--------------------------------------\n");
+			//	cerruer++;
 				
 				}
 			}
@@ -162,9 +176,9 @@ void analyseur_sem(list token)
 			if(token._token[i+5].type==TOKEN_INT||token._token[i+5].type==TOKEN_REAL)
 			{
 				
-				if(strcmp(token._token[i+6].value,"0"))
+				if(atoi(token._token[i+5].value) == 0)
 				{
-					printf("--------------------------------------\n");
+					
 					printf("line %d: DEVISION BY 0!! MATH ERROR\n",token.line[i]);
 					printf("--------------------------------------\n");
 					cerruer++;
@@ -179,7 +193,7 @@ void analyseur_sem(list token)
 					{
 						if(strcmp(id[j].value,"0")==0)
 						{
-							printf("--------------------------------------\n");
+							
 							printf("DEVISION BY 0 IN VARIABLE %s!! MATH ERROR\n",id[j].name);
 							printf("--------------------------------------\n");
 							cerruer++;
@@ -219,7 +233,7 @@ void analyseur_sem(list token)
 			}
 			if(id[pos1].type!=id[pos2].type)
 			{
-				printf("--------------------------------------\n");
+				
 				printf("ERROR! U CANT GIVE VARIABLE OF DIFFERENT TYPING\n");
 				printf("--------------------------------------\n");
 				cerruer++;	

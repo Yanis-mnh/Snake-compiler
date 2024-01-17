@@ -57,7 +57,7 @@ void convert(list tokenList)
 				break;
 			}
 			case TOKEN_SNK_END:{
-				fprintf(g,"%s","\n printf(\"Press Enter to exit...\");\ngetchar();\nreturn 0; \n}");
+				fprintf(g,"%s","\n printf(\"Press Enter to exit...\");\nreturn 0; \n}");
 				break;
 			}
 			
@@ -122,7 +122,11 @@ void convert(list tokenList)
 				break;
 			}
 			case TOKEN_IF:{
-				fprintf(g,"%s","if");
+				fprintf(g,"%s","if ");
+				break;
+			}
+			case TOKEN_ELSE:{
+				fprintf(g,"%s","else ");
 				break;
 			}
 			case TOKEN_OPEN_BRACKET:{
@@ -159,7 +163,7 @@ void convert(list tokenList)
 					i++;
 					if(tokenList._token[i].type == TOKEN_IDENTIFIER)
 					{
-						fprintf(g,"printf(\"%%d\" , %s);", tokenList._token[i].value);	
+						fprintf(g,"printf(\"%%g\" , %s);", tokenList._token[i].value);	
 					}
 					else if(tokenList._token[i].type == TOKEN_STRING)
 					{

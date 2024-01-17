@@ -41,6 +41,11 @@ void walk(list tokenList)
 	affectVar(tokenList);
 	Snk_Print(tokenList);
 	operation(tokenList);
+	if(tokenList._token[i].type == TOKEN_BEGIN)
+	{
+		printf("ligne : %d\n\tERREUR : expected a valide condition befor Begin \n",tokenList.line[i]);
+		nbrErreur++;
+	}
 	if(tokenList._token[i].type == TOKEN_ELSE){
 		printf("ligne : %d\n\tERREUR : expected \"If\" before \"Else\" token \n",tokenList.line[i]);
 		nbrErreur++;
@@ -272,12 +277,13 @@ void Snk_Print(list tokenList)
 //block de code
 void blockDeCode(list tokenList)
 {
+	/*
 	if(tokenList._token[i].type == TOKEN_BEGIN  )
 		if( tokenList._token[i-1].type != TOKEN_CLOSE_BRACKET && tokenList._token[i-1].type != TOKEN_ELSE)
 		{
 			printf("ligne : %d\n\tERREUR : expected ']' before \"Begin\" token \n", tokenList.line[i]);
 			nbrErreur++;
-		}
+		}*/
 	
 }
 
@@ -513,6 +519,8 @@ void conditionWhile(list tokenList)
 			if(tokenList._token[i].type == TOKEN_BEGIN)
 			{
 				int beginPos =i;
+				i++;
+				checkToken(tokenList);
 				while( i < tokenList.nbrToken && tokenList._token[i].type != TOKEN_END)
 				{
 					
