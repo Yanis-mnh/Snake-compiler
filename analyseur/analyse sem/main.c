@@ -35,9 +35,6 @@ int main(int argc,char *argv[])
 	analyseur_sem(tokenList);
 	
 	
-	
-	
-	
 	//fin programme
 	fclose(token);
 	return 0;

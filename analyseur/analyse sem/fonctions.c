@@ -45,7 +45,19 @@ typedef enum {
 
 */
 //function principle
-
+bool exist(id id[30],char value[])
+{
+	int i=0;
+	while(i<30)
+	{
+		if(strcmp(value,id[i].name)==0)
+		{
+			return true;
+		}
+		i++;
+	}
+	return false;
+}
 void analyseur_sem(list token)
 {
 	//example de letulisation des token
@@ -56,17 +68,26 @@ void analyseur_sem(list token)
 	{
 		if(token._token[i].type == TOKEN_DEC_INT)
 		{
-			k=0;
+			
 			while(token._token[i].type!=TOKEN_FIN_LIGNE)
 			{
 				
 				i++;
 				if(token._token[i].type==TOKEN_IDENTIFIER)
 				{
-					strcpy(id[j].name,token._token[i].value);
-							strcpy(id[j].value,"init");
-							id[j].type= TOKEN_DEC_INT;
-							j++;	
+					
+					if(exist(id,token._token[i].value)==true)
+					{
+						printf("line %d: id value: %s erreur already declared\n",token.line[i],token._token[i].value);
+						cerruer++;
+					}
+					else
+					{
+						strcpy(id[j].name,token._token[i].value);
+						strcpy(id[j].value,"init");
+						id[j].type= TOKEN_DEC_INT;
+						j++;	
+					}	
 				}
 					
 			}
@@ -74,19 +95,27 @@ void analyseur_sem(list token)
 		}
 		if(token._token[i].type == TOKEN_DEC_REAL)
 		{
-			k=0;
+			
 			while(token._token[i].type!=TOKEN_FIN_LIGNE)
 			{
 				i++;
 				if(token._token[i].type==TOKEN_IDENTIFIER)
 				{
-					strcpy(id[j].name,token._token[i].value);
-							strcpy(id[j].value,"init");
-							id[j].type= TOKEN_DEC_REAL;
-							j++;
 					
+					if(exist(id,token._token[i].value)==true)
+					{
+						printf("line %d: id value: %s erreur already declared\n",token.line[i],token._token[i].value);
+						cerruer++;
+					}
+					else
+					{
+						strcpy(id[j].name,token._token[i].value);
+						strcpy(id[j].value,"init");
+						id[j].type= TOKEN_DEC_REAL;
+						j++;
+					
+					}
 				}
-					
 			}
 				
 		}	
@@ -106,7 +135,7 @@ void analyseur_sem(list token)
 						{
 							cerruer++;
 							printf("--------------------------------------\n");
-							printf("mistake as %s is declared as int\n",token._token[i+1].value);
+							printf("line %d: mistake as %s is declared as int\n",token.line[i],token._token[i+1].value);
 							printf("--------------------------------------\n");
 						}
 						else
@@ -120,7 +149,7 @@ void analyseur_sem(list token)
 				if(here==false)
 				{
 				printf("--------------------------------------\n");
-				printf("u are using a none declare variable %s\n",token._token[i+1].value);
+				printf("line %d: u are using a none declare variable %s\n",token.line[i],token._token[i+1].value);
 				printf("--------------------------------------\n");
 				cerruer++;
 				
@@ -133,10 +162,10 @@ void analyseur_sem(list token)
 			if(token._token[i+5].type==TOKEN_INT||token._token[i+5].type==TOKEN_REAL)
 			{
 				
-				if(strcmp(token._token[i+5].value,"0"))
+				if(strcmp(token._token[i+6].value,"0"))
 				{
 					printf("--------------------------------------\n");
-					printf("DEVISION BY 0!! MATH ERROR\n");
+					printf("line %d: DEVISION BY 0!! MATH ERROR\n",token.line[i]);
 					printf("--------------------------------------\n");
 					cerruer++;
 				}
@@ -209,7 +238,7 @@ void analyseur_sem(list token)
 	//bone chance u will nead it :)
 	if(cerruer==0)
 	{
-		printf("you are semanticly correct!");
+		printf("Correctly Executed");
 	}
 	else{
 		printf("u have %d erreurs, please fix them",cerruer);
@@ -217,4 +246,5 @@ void analyseur_sem(list token)
 }
 
 #endif
+
 

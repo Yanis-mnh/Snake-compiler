@@ -13,6 +13,7 @@
 int nbrErreur = 0;
 int i =1;
 
+
 //reference for the private function 
 void walk(list tokenList);
 void blockDeCode(list tokenList);
@@ -43,6 +44,10 @@ void walk(list tokenList)
 	if(tokenList._token[i].type == TOKEN_ELSE){
 		printf("ligne : %d\n\tERREUR : expected \"If\" before \"Else\" token \n",tokenList.line[i]);
 		nbrErreur++;
+	}
+	if(tokenList._token[i].type == TOKEN_SNK_END  && i < tokenList.nbrToken-1 ){
+		nbrErreur ++;
+		printf("ERROR: ligne %d le programme doit tojour finir par SNK_END\n",tokenList.line[tokenList.nbrToken-1]);
 	}
 }
 
@@ -294,10 +299,7 @@ void isCorectLayout(list tokenList)
 		nbrErreur ++;
 		printf("ERROR: ligne %d le programme doit tojour comencer par SNK_BEGIN\n",tokenList.line[0]);
 	}
-	if(tokenList._token[tokenList.nbrToken-1].type != TOKEN_SNK_END  ){
-		nbrErreur ++;
-		printf("ERROR: ligne %d le programme doit tojour finir par SNK_END\n",tokenList.line[tokenList.nbrToken-1]);
-	}
+	
 }
 
 
@@ -469,7 +471,7 @@ void conditionElseIf(list tokenList)
 		{
 			conditionElseIf(tokenList);
 			return;
-		}
+		}i--;
 		
 	}else i--;
 	

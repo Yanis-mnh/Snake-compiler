@@ -1,9 +1,14 @@
 Snk_Begin
-	Snk_Int i$
-	Set i 5$
-	If[i<=5]
-		Snk_Int i,j,k$
-		
-	Else
-		Snk_Print "fotato \n" $
+
+Snk_Int i$
+If[i<10]
+Begin
+	If[i>10]
+		If[o>10]
+			If[o>10]
+				If[o>10]
+					Add j,j,1$
+	
+End
+	
 Snk_End

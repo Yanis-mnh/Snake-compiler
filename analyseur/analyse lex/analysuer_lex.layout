@@ -10,15 +10,15 @@ Focused=2
 <<<<<<< HEAD
 Focused=2
 [Editor_0]
-CursorCol=2
+CursorCol=4
 CursorRow=22
 TopLine=2
 LeftChar=1
 [Editor_1]
 <<<<<<< HEAD
-CursorCol=21
-CursorRow=282
-TopLine=253
+CursorCol=6
+CursorRow=70
+TopLine=64
 =======
 CursorCol=25
 CursorRow=133
@@ -26,9 +26,9 @@ TopLine=104
 >>>>>>> fix_syn
 LeftChar=1
 [Editor_2]
-CursorCol=22
-CursorRow=31
-TopLine=14
+CursorCol=5
+CursorRow=41
+TopLine=20
 =======
 Focused=1
 LeftChar=1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://pdbqmfai7ilx"]
+[gd_scene load_steps=15 format=3 uid="uid://pdbqmfai7ilx"]
 
 [ext_resource type="Script" path="res://scean/editeur/editeur_text.gd" id="1_enrew"]
 [ext_resource type="FontFile" uid="uid://b3rxuuttd34fr" path="res://assets/font/MPLUSRounded1c-Medium.ttf" id="2_qkb22"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cmymqbejqbmto" path="res://scean/console/console_container.tscn" id="5_d852s"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_lnlwa"]
-number_color = Color(0.466667, 0.721569, 0.643137, 1)
+number_color = Color(0.0666667, 0.568627, 0.866667, 1)
 symbol_color = Color(0.298039, 0.423529, 0.501961, 1)
 member_variable_color = Color(0.180392, 0.654902, 0.505882, 1)
 
@@ -74,6 +74,42 @@ Button/styles/focus = SubResource("StyleBoxLine_jkyq8")
 Button/styles/hover = SubResource("StyleBoxFlat_grk3q")
 Button/styles/normal = SubResource("StyleBoxFlat_8glvm")
 Button/styles/pressed = SubResource("StyleBoxFlat_qtbda")
+
+[sub_resource type="Animation" id="Animation_7tnv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Console:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(500, 500)]
+}
+
+[sub_resource type="Animation" id="Animation_2skbf"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Console:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2.82843, 0.203063),
+"update": 0,
+"values": [Vector2i(100, 100), Vector2i(500, 500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87opo"]
+_data = {
+"RESET": SubResource("Animation_7tnv3"),
+"open": SubResource("Animation_2skbf")
+}
 
 [node name="editeur_text" type="Control"]
 layout_mode = 3
@@ -215,7 +251,6 @@ ok_button_text = "Ouvrir"
 cancel_button_text = "Anuller"
 file_mode = 0
 access = 2
-filters = PackedStringArray(".snk")
 
 [node name="SaveFileWindow" type="FileDialog" parent="."]
 initial_position = 1
@@ -226,7 +261,7 @@ transparent = true
 ok_button_text = "Enregistrer"
 cancel_button_text = "Anuller"
 access = 2
-filters = PackedStringArray("..snk")
+filters = PackedStringArray(" ..snk")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 title = "Warning!!"
@@ -251,6 +286,11 @@ unresizable = true
 always_on_top = true
 
 [node name="Control" parent="Console" instance=ExtResource("5_d852s")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_87opo")
+}
 
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="file_selected" from="OpenFileWindow" to="." method="_on_open_file_window_file_selected"]
