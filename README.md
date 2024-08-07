@@ -1,18 +1,18 @@
 # Snake Compiler
 
-Le compilateur Snake est un projet visant à réaliser l'analyseur lexical, syntaxique et sémantique d'un langage d'un langage fictif, ainsi qu'une interface graphique pour faciliter la compilation du langage.
+The Snake Compiler is a project aimed at creating the lexical, syntactic, and semantic analyzer for a fictional language, as well as a graphical interface to facilitate the compilation of the language.
 
-## Fonctionnalités
+## Features
 
-### Analyseur
-- **Analyseur lexical**: Le programme identifie les tokens (mots-clés, identificateurs, opérateurs, etc.) dans le code source Snake.
-- **Analyseur syntaxique**: Il vérifie la structure du code pour s'assurer qu'il respecte la grammaire définie pour le langage.
-- **Analyseur sémantique**: Effectue des vérifications supplémentaires pour garantir la cohérence et la validité du code.
+### Analyzer
+- **Lexical Analyzer:** The program identifies tokens (keywords, identifiers, operators, etc.) in the Snake source code.
+- **Syntax Analyzer:** It checks the code structure to ensure it adheres to the grammar defined for the language.
+- **Semantic Analyzer:** Performs additional checks to ensure the code's consistency and validity.
 
-### Langage Snake (exemple)
+### Snake Language (Example)
 ```snake
 Snk_Begin
-    Snk_Int i, j, x1, x2, somme $
+    Snk_Int i, j, x1, x2, sum $
     Snk_Real x3 $
     Set i 33 $
     If [ i<50]
@@ -27,34 +27,33 @@ Snk_Begin
     Snk_Print i,j $
     While[i<50]
     Begin
-        $$ Commentaire sur plusieurs lignes est # bla bla #
-        # Commentaires multi-lignes
-         comme ceci #
+        $$ Multi-line comment is # bla bla #
+        # Multi-line comments
+         like this #
 
-        Add somme,i,1$
+        Add sum,i,1$
         Snk_Print i$
     End 
-$$ Ceci est un commentaire sur une ligne
+$$ This is a single-line comment
 Snk_End
 ```
-## Interface Graphique
 
-L'interface utilisateur est réalisée en utilisant Godot 4 pour fournir une expérience conviviale pour compiler le langage Snake.
+## Graphical Interface
 
-## Utilisation
+The user interface is created using Godot 4 to provide a user-friendly experience for compiling the Snake language.
 
-### Prérequis
+## Usage
 
-- **Godot Engine 4**: Pour exécuter l'interface graphique.
+### Prerequisites
 
-### Compilation du code Snake
+- **Godot Engine 4:** To run the graphical interface.
 
-1. Cloner le dépôt GitHub.
-2. Ouvrir le projet dans Godot 4.
-3. Utiliser l'interface graphique pour charger et compiler les fichiers écrits en Snake.
+### Compiling Snake Code
 
+1. Clone the GitHub repository.
+2. Open the project in Godot 4.
+3. Use the graphical interface to load and compile Snake code files.
 
-## Licence
+## License
 
-Ce projet est sous licence [GNU](). Consultez le fichier LICENSE pour plus de détails.
-
+This project is licensed under [GNU](). See the LICENSE file for details.
